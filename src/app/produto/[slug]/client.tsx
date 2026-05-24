@@ -229,7 +229,8 @@ function CapabilityPanel({
               onClick={() => setLightboxOpen(true)}
               aria-label={`Ver imagem completa: ${cap.image.alt}`}
             >
-              <div className="transition-transform duration-500 ease-out group-hover:scale-[1.06] origin-center">
+              {/* Permanently zoomed-in close-up — overflow clipped by parent */}
+              <div style={{ transform: "scale(1.65)", transformOrigin: "center 28%" }}>
                 <Image
                   src={cap.image.light}
                   alt={cap.image.alt}
@@ -247,8 +248,9 @@ function CapabilityPanel({
                   className="w-full hidden dark:block"
                 />
               </div>
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.03] transition-colors duration-300 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold" style={{ background: "rgba(0,0,0,0.6)", color: "#fff" }}>
+              {/* Expand hint on hover */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.04] transition-colors duration-200 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold" style={{ background: "rgba(0,0,0,0.65)", color: "#fff" }}>
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                     <path d="M2 2H5M2 2V5M2 2L5.5 5.5M10 7V10M10 10H7M10 10L6.5 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
