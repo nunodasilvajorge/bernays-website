@@ -229,8 +229,25 @@ function CapabilityPanel({
               onClick={() => setLightboxOpen(true)}
               aria-label={`Ver imagem completa: ${cap.image.alt}`}
             >
-              {/* Permanently zoomed-in close-up — overflow clipped by parent */}
-              <div style={{ transform: "scale(1.65)", transformOrigin: "center 28%" }}>
+              {/* Chrome + image scaled as a unit — chrome anchors the top, content readable below */}
+              <div style={{ transform: "scale(1.55)", transformOrigin: "50% 6%" }}>
+                {/* Browser chrome */}
+                <div
+                  className="flex items-center gap-2.5 px-3 py-2 border-b"
+                  style={{ background: "var(--page-surface)", borderColor: "var(--page-border)" }}
+                >
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 rounded-full bg-[#ff5f57]" />
+                    <div className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
+                    <div className="w-2 h-2 rounded-full bg-[#28c840]" />
+                  </div>
+                  <div
+                    className="flex-1 max-w-[160px] mx-auto rounded px-2 py-0.5 text-[10px] text-center"
+                    style={{ background: "var(--page-card)", color: "var(--page-text-faint)" }}
+                  >
+                    app.bernays.pt
+                  </div>
+                </div>
                 <Image
                   src={cap.image.light}
                   alt={cap.image.alt}
