@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@source "../**/*.{ts,tsx}";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-brand: oklch(0.581 0.243 263);
+  --color-brand-hover: oklch(0.546 0.231 263);
+  --color-brand-light: oklch(0.696 0.171 253);
+  --color-brand-pale: oklch(0.85 0.12 263);
+
+  --color-success: oklch(0.621 0.157 154);
+  --color-warning: oklch(0.681 0.163 42);
+  --color-danger: oklch(0.604 0.244 27);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    var(--font-inter, "Inter"), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    var(--font-inter, "Inter"), "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Light mode (default) */
+:root {
+  --page-bg: #fafbff;
+  --page-surface: #f0f2f9;
+  --page-card: rgba(0, 0, 0, 0.035);
+  --page-border: rgba(0, 0, 0, 0.08);
+  --page-text: oklch(0.13 0.018 271);
+  --page-text-muted: oklch(0.45 0.025 264);
+  --page-text-faint: oklch(0.50 0.02 264);
+  --dot-color: rgba(34, 87, 255, 0.07);
+  --hero-glow: oklch(0.581 0.243 263 / 0.22);
+
+  /* Browser mockup — light Bernays UI */
+  --mock-titlebar: #ecedf2;
+  --mock-bg: #f4f5f9;
+  --mock-sidebar: #ebedf2;
+  --mock-card: rgba(0, 0, 0, 0.04);
+  --mock-border: rgba(0, 0, 0, 0.07);
+  --mock-text-hi: rgba(0, 0, 0, 0.88);
+  --mock-text-md: rgba(0, 0, 0, 0.55);
+  --mock-text-lo: rgba(0, 0, 0, 0.30);
+  --mock-url: rgba(0, 0, 0, 0.38);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark mode */
+.dark {
+  --page-bg: #07080e;
+  --page-surface: #0c0d18;
+  --page-card: rgba(255, 255, 255, 0.035);
+  --page-border: rgba(255, 255, 255, 0.07);
+  --page-text: rgba(255, 255, 255, 0.92);
+  --page-text-muted: rgba(255, 255, 255, 0.55);
+  --page-text-faint: rgba(255, 255, 255, 0.28);
+  --dot-color: rgba(255, 255, 255, 0.07);
+  --hero-glow: oklch(0.581 0.243 263 / 0.18);
+
+  /* Browser mockup — dark Bernays UI */
+  --mock-titlebar: #13141e;
+  --mock-bg: #0b0c16;
+  --mock-sidebar: #090a13;
+  --mock-card: rgba(255, 255, 255, 0.04);
+  --mock-border: rgba(255, 255, 255, 0.06);
+  --mock-text-hi: rgba(255, 255, 255, 0.90);
+  --mock-text-md: rgba(255, 255, 255, 0.55);
+  --mock-text-lo: rgba(255, 255, 255, 0.28);
+  --mock-url: rgba(255, 255, 255, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--page-bg);
+  color: var(--page-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: oklch(0.581 0.243 263 / 0.25);
+}
+
+/* Pricing slider */
+.bernays-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+.bernays-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: oklch(0.581 0.243 263);
+  cursor: pointer;
+  box-shadow: 0 0 0 4px oklch(0.581 0.243 263 / 0.2);
+  transition: box-shadow 0.15s;
+}
+.bernays-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 6px oklch(0.581 0.243 263 / 0.28);
+}
+.bernays-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: oklch(0.581 0.243 263);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 0 4px oklch(0.581 0.243 263 / 0.2);
+}
