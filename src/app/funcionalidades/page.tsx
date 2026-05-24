@@ -8,6 +8,7 @@ import { FloatingCta } from "@/components/floating-cta"
 import { modules, type Module } from "@/lib/features-data"
 import { motion, useInView } from "framer-motion"
 import { ArrowRight } from "lucide-react"
+import { Academia } from "@/components/academia"
 
 const DEMO_URL = process.env.NEXT_PUBLIC_DEMO_URL ?? "https://demo.bernays.pt"
 const ease = [0.22, 1, 0.36, 1] as const
@@ -263,6 +264,11 @@ export default function FuncionalidadesPage() {
           {filtered.map((mod, i) => (
             <ModuleSection key={mod.id} mod={mod} index={i} />
           ))}
+        </div>
+
+        {/* Academia program */}
+        <div className="-mx-6 mt-4">
+          <Academia />
         </div>
 
         {/* Bottom CTA strip */}

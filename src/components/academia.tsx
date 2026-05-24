@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { FadeIn } from "@/lib/animate"
 import { motion, AnimatePresence } from "framer-motion"
 import { GraduationCap, BookOpen, Users } from "lucide-react"
@@ -16,13 +16,14 @@ const benefits = [
   },
   {
     icon: <Users size={18} strokeWidth={1.75} />,
-    text: "Contas de alunos e professores sem limite de utilizadores",
+    text: "Sem limite de utilizadores — professores e alunos incluídos",
   },
 ]
 
 export function Academia() {
   const [email, setEmail] = useState("")
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const emailRef = useRef<HTMLInputElement>(null)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -42,7 +43,7 @@ export function Academia() {
 
   return (
     <section id="academia" className="relative py-16 md:py-24 px-6 overflow-hidden" style={{ background: "var(--page-surface)" }}>
-      {/* Subtle top glow */}
+      {/* Top rule */}
       <div
         className="absolute top-0 left-0 right-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(90deg, transparent 0%, oklch(0.581 0.243 263 / 0.2) 40%, oklch(0.581 0.243 263 / 0.2) 60%, transparent 100%)" }}
@@ -59,19 +60,19 @@ export function Academia() {
             </div>
 
             <h2
-              className="text-[clamp(28px,4vw,48px)] font-extrabold tracking-[-0.035em] text-slate-900 dark:text-white leading-[1.05] mb-4"
-              style={{ fontFamily: "var(--font-display)" }}
+              className="text-[clamp(28px,4vw,48px)] font-extrabold tracking-[-0.035em] leading-[1.05] mb-4"
+              style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
             >
-              Gratuito para universidades{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{ backgroundImage: "linear-gradient(135deg, oklch(0.581 0.243 263) 0%, oklch(0.65 0.18 253) 100%)" }}
               >
-                e politécnicos.
-              </span>
+                Gratuito
+              </span>{" "}
+              para universidades e politécnicos.
             </h2>
 
-            <p className="text-[16px] text-slate-500 dark:text-white/45 leading-relaxed mb-8 max-w-xl">
+            <p className="text-[16px] leading-relaxed mb-8 max-w-xl" style={{ color: "var(--page-text-muted)" }}>
               Instituições de ensino superior que queiram usar o Bernays para ensinar gestão de agências de Relações Públicas têm acesso totalmente gratuito — para professores e alunos.
             </p>
 
@@ -84,13 +85,13 @@ export function Academia() {
                   >
                     {b.icon}
                   </div>
-                  <span className="text-[14px] text-slate-600 dark:text-white/55 leading-snug pt-1">{b.text}</span>
+                  <span className="text-[14px] leading-snug pt-1" style={{ color: "var(--page-text-muted)" }}>{b.text}</span>
                 </li>
               ))}
             </ul>
 
             <div className="max-w-sm">
-              <p className="text-[13px] font-medium mb-3 text-slate-400 dark:text-white/35">
+              <p className="text-[13px] font-medium mb-3" style={{ color: "var(--page-text-faint)" }}>
                 Deixa o teu email institucional e entramos em contacto.
               </p>
               <AnimatePresence mode="wait">
@@ -109,6 +110,7 @@ export function Academia() {
                 ) : (
                   <motion.form key="form" onSubmit={handleSubmit} className="flex gap-2">
                     <input
+                      ref={emailRef}
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -120,9 +122,17 @@ export function Academia() {
                     <button
                       type="submit"
                       disabled={state === "loading"}
-                      className="px-4 py-2.5 bg-brand hover:bg-brand-hover text-white font-semibold rounded-xl text-[14px] transition-colors duration-150 shrink-0 disabled:opacity-60"
+                      className="px-4 py-2.5 bg-brand hover:bg-brand-hover text-white font-semibold rounded-xl text-[14px] transition-colors duration-150 shrink-0 disabled:opacity-60 flex items-center gap-2"
                     >
-                      {state === "loading" ? "..." : "Enviar"}
+                      {state === "loading" ? (
+                        <>
+                          <svg className="animate-spin" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                            <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1.5" />
+                            <path d="M7 1.5A5.5 5.5 0 0 1 12.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                          </svg>
+                          A enviar…
+                        </>
+                      ) : "Enviar"}
                     </button>
                   </motion.form>
                 )}
@@ -133,7 +143,7 @@ export function Academia() {
             </div>
           </FadeIn>
 
-          {/* Right: visual card */}
+          {/* Right: price card */}
           <FadeIn delay={0.15}>
             <motion.div
               whileHover={{ y: -4 }}
@@ -163,10 +173,22 @@ export function Academia() {
               >
                 €0
               </p>
-              <p className="text-[13px] font-semibold text-slate-700 dark:text-white/70 mb-1">por ano, por instituição</p>
-              <p className="text-[12px] text-slate-400 dark:text-white/35 mt-3 leading-snug">
+              <p className="text-[13px] font-semibold mb-1" style={{ color: "var(--page-text)" }}>por ano, por instituição</p>
+              <p className="text-[12px] mt-3 leading-snug" style={{ color: "var(--page-text-faint)" }}>
                 Para uso pedagógico em<br />Relações Públicas e Comunicação
               </p>
+              {state !== "success" && (
+                <button
+                  onClick={() => emailRef.current?.focus()}
+                  className="mt-5 w-full inline-flex items-center justify-center gap-1.5 text-[13px] font-semibold py-2.5 rounded-xl border transition-colors duration-150 hover:border-brand/50"
+                  style={{ borderColor: "var(--page-border)", color: "var(--page-text-muted)" }}
+                >
+                  Pedir acesso
+                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7H11.5M7.5 3L11.5 7L7.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              )}
             </motion.div>
           </FadeIn>
 
