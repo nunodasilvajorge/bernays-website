@@ -218,26 +218,21 @@ function CapabilityPanel({
         {cap.image ? (
           <>
             <motion.button
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="w-full rounded-2xl overflow-hidden border cursor-pointer group relative text-left block"
+              transition={{ duration: 0.55, delay: 0.08, ease }}
+              className="w-full rounded-2xl overflow-hidden border cursor-zoom-in group relative text-left block"
               style={{
-                aspectRatio: "16 / 7",
                 borderColor: "rgba(0,0,0,0.08)",
                 boxShadow: "0 2px 0 rgba(0,0,0,0.04), 0 24px 64px rgba(0,0,0,0.14), 0 8px 24px rgba(0,0,0,0.07)",
               }}
               onClick={() => setLightboxOpen(true)}
               aria-label={`Ver imagem completa: ${cap.image.alt}`}
             >
-              {/* Zoomed detail — shows top-centre area of the screenshot */}
-              <div
-                className="absolute top-0 left-0 w-full"
-                style={{ transform: "scale(1.6)", transformOrigin: "center 22%" }}
-              >
+              <div className="transition-transform duration-500 ease-out group-hover:scale-[1.06] origin-center">
                 <Image
                   src={cap.image.light}
-                  alt=""
+                  alt={cap.image.alt}
                   width={960}
                   height={600}
                   loading="lazy"
@@ -245,29 +240,20 @@ function CapabilityPanel({
                 />
                 <Image
                   src={cap.image.dark}
-                  alt=""
+                  alt={cap.image.alt}
                   width={960}
                   height={600}
                   loading="lazy"
                   className="w-full hidden dark:block"
                 />
               </div>
-
-              {/* Bottom gradient + expand hint */}
-              <div
-                className="absolute bottom-0 inset-x-0 h-20 pointer-events-none"
-                style={{ background: "linear-gradient(to top, var(--page-bg) 10%, transparent 100%)" }}
-              />
-              <div className="absolute bottom-0 inset-x-0 flex items-center justify-center gap-1.5 pb-3">
-                <span
-                  className="text-[11px] font-semibold tracking-wide transition-colors duration-150 group-hover:opacity-100"
-                  style={{ color: "var(--page-text-faint)" }}
-                >
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.03] transition-colors duration-300 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold" style={{ background: "rgba(0,0,0,0.6)", color: "#fff" }}>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2 2H5M2 2V5M2 2L5.5 5.5M10 7V10M10 10H7M10 10L6.5 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                   Ver completo
-                </span>
-                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true" style={{ color: "var(--page-text-faint)" }}>
-                  <path d="M2 2H5M2 2V5M2 2L5.5 5.5M10 7V10M10 10H7M10 10L6.5 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                </div>
               </div>
             </motion.button>
             <AnimatePresence>
