@@ -217,20 +217,20 @@ function CapabilityPanel({
       <div className={reversed ? "md:col-start-1 md:row-start-1" : ""}>
         {cap.image ? (
           <>
-            <button
-              className="w-full rounded-2xl overflow-hidden border cursor-zoom-in group relative text-left"
-              style={{
-                borderColor: "rgba(0,0,0,0.08)",
-                boxShadow: "0 2px 0 rgba(0,0,0,0.04), 0 24px 64px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06)",
-              }}
-              onClick={() => setLightboxOpen(true)}
-              aria-label={`Ver em detalhe: ${cap.image.alt}`}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 36 }}
+              animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+              transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              style={{ willChange: "transform" }}
             >
-              <motion.div
-                initial={{ scale: 1.06 }}
-                animate={isInView ? { scale: 1 } : { scale: 1.06 }}
-                transition={{ duration: 0.9, ease }}
-                style={{ willChange: "transform" }}
+              <button
+                className="w-full rounded-2xl overflow-hidden border cursor-zoom-in group relative text-left"
+                style={{
+                  borderColor: "rgba(0,0,0,0.08)",
+                  boxShadow: "0 2px 0 rgba(0,0,0,0.04), 0 24px 64px rgba(0,0,0,0.14), 0 8px 24px rgba(0,0,0,0.07)",
+                }}
+                onClick={() => setLightboxOpen(true)}
+                aria-label={`Ver em detalhe: ${cap.image.alt}`}
               >
                 <Image
                   src={cap.image.light}
@@ -248,15 +248,15 @@ function CapabilityPanel({
                   loading="lazy"
                   className="w-full hidden dark:block"
                 />
-              </motion.div>
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.04] transition-colors duration-200 flex items-end justify-end p-3">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "rgba(0,0,0,0.55)" }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M8.5 1.5H12.5V5.5M12.5 1.5L7.5 6.5M5.5 12.5H1.5V8.5M1.5 12.5L6.5 7.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.04] transition-colors duration-200 flex items-end justify-end p-3">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "rgba(0,0,0,0.55)" }}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M8.5 1.5H12.5V5.5M12.5 1.5L7.5 6.5M5.5 12.5H1.5V8.5M1.5 12.5L6.5 7.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
                 </div>
-              </div>
-            </button>
+              </button>
+            </motion.div>
             <AnimatePresence>
               {lightboxOpen && (
                 <ImageLightbox image={cap.image} onClose={() => setLightboxOpen(false)} />
