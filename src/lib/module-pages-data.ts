@@ -266,14 +266,14 @@ export const modulePages: ModulePageData[] = [
       },
       {
         icon: "Star",
-        title: "Quem é o melhor consultor para este cliente",
-        desc: "A matriz de competências regista as especializações de cada consultor — sector de experiência, tipo de media, nível de senioridade, línguas, áreas técnicas. Quando surge um pitch, o sócio sabe imediatamente quem tem o perfil certo sem depender da memória de ninguém.",
+        title: "Objectivos da equipa alinhados do topo à base",
+        desc: "O módulo de Performance define objectivos em cascata: da empresa ao departamento, do departamento ao individual. Cada consultor sabe o que contribui para o todo — e o sócio vê em tempo real quais os objectivos em risco antes de o trimestre terminar.",
         bullets: [
-          "Skills e especializações por consultor actualizáveis a qualquer momento",
-          "Filtro por competência para identificar rapidamente o fit certo para um cliente novo",
+          "OKRs em três níveis (Empresa → Departamento → Individual) sem duplicação manual",
+          "Badges 'Em risco' automáticos quando a progressão está abaixo do ritmo esperado",
         ],
-        imageSlotDesc: "Perfil de consultor com tags de competências (ex: 'Media Relations', 'Reputação Digital', 'Farmacêutico'). Projectos recentes associados abaixo.",
-        image: { light: "/pessoas-cap3-light.webp", dark: "/pessoas-cap3-dark.webp", alt: "Perfil de consultor no Bernays com departamento, manager, contrato e historial de ausências" },
+        imageSlotDesc: "Performance / Objectivos & KPIs: três cartões de progresso circular (Empresa 83%, Departamento 0%, Individual 50%). Cards de OKR com key results e badges Em risco.",
+        image: { light: "/pessoas-cap3-light.webp", dark: "/pessoas-cap3-dark.webp", alt: "Performance e OKRs no Bernays com objectivos em cascata por empresa, departamento e individual" },
       },
     ],
     featureGroups: [
@@ -320,26 +320,29 @@ export const modulePages: ModulePageData[] = [
           "Alertas de renovação configuráveis com 30 e 60 dias de antecedência",
         ],
         imageSlotDesc: "Lista de subscrições SaaS com colunas: Nome da ferramenta, Custo mensal, Data de renovação, Responsável, Estado. Uma ou duas em vermelho indicando renovação próxima.",
+        image: { light: "/escritorio-cap1-light.webp", dark: "/escritorio-cap1-dark.webp", alt: "Lista de fornecedores do Bernays com categorias, SLA, datas de contrato e custo total" },
       },
       {
         icon: "FileText",
-        title: "Contratos e documentos legais versionados",
-        desc: "Contratos de clientes, acordos de confidencialidade, documentos de compliance e seguros — todos versionados, com data de validade, responsável e estado de revisão. Quando o advogado ou o cliente pede um documento, está acessível em segundos.",
+        title: "Salas reservadas sem email nem papel",
+        desc: "Ver qual a sala está disponível, para quantas pessoas e reservar directamente na plataforma — sem email à recepcionista, sem conflitos de dupla reserva, sem post-it na porta. A agenda da equipa e a disponibilidade das salas estão no mesmo sítio.",
         bullets: [
-          "Versionamento automático — sempre clara qual é a versão em vigor",
-          "Alertas de validade para contratos e apólices com data de expiração",
+          "Vista semanal de todas as salas com capacidade e disponibilidade em tempo real",
+          "Reserva directa integrada — sem ferramentas externas nem processos manuais",
         ],
-        imageSlotDesc: "Lista de documentos com tipo (Contrato, NDA, Apólice), data, responsável e estado (Em vigor / A expirar / Expirado). Um ou dois com badge 'A expirar em 30 dias'.",
+        imageSlotDesc: "Calendário semanal de salas: Sala Bernays (8 pax) e Sala Edward (4 pax). Células Available em verde, slots reservados em azul.",
+        image: { light: "/escritorio-cap2-light.webp", dark: "/escritorio-cap2-dark.webp", alt: "Reserva de salas de reunião no Bernays com vista semanal e disponibilidade em tempo real" },
       },
       {
         icon: "Package",
-        title: "Activos e inventário sem rastreio por email",
-        desc: "Hardware, licenças individuais, equipamento partilhado — tudo atribuído por colaborador com data de entrega e estado de devolução. Quando alguém entra ou sai da equipa, a lista do que tem atribuído está imediatamente disponível.",
+        title: "Documentos de compliance com validade controlada",
+        desc: "Seguros, registos regulatórios e planos de emergência — todos com data de validade visível e badge de estado. O Bernays alerta antes de um documento expirar para que a renovação seja intencional, não uma emergência descoberta numa auditoria.",
         bullets: [
-          "Activos atribuídos por colaborador — associados ao perfil de cada pessoa no módulo de Pessoas",
-          "Registo de saída sincronizado com off-boarding — checklist automática de devolução",
+          "Badges de estado por documento: válido, a expirar, expirado — visíveis sem abrir cada ficheiro",
+          "Registos RGPD, ANPC e seguros centralizados — auditoria pronta em minutos",
         ],
-        imageSlotDesc: "Tabela de activos: Nome, Tipo (Hardware / Licença / Equipamento), Atribuído a, Data de entrega, Estado. 8-12 itens, alguns marcados como Disponível.",
+        imageSlotDesc: "Lista Conformidade: Seguro Multirriscos (Valid until 1 jan 2027), Vistoria ANPC (Valid until 15 mai 2027), Registo RGPD — CNPD com referências e datas.",
+        image: { light: "/escritorio-cap3-light.webp", dark: "/escritorio-cap3-dark.webp", alt: "Conformidade do Bernays com documentos de seguro, ANPC e RGPD e badges de validade" },
       },
     ],
     featureGroups: [
@@ -360,6 +363,7 @@ export const modulePages: ModulePageData[] = [
       { id: "financeiro", integrationNote: "Despesas de escritório e custos de fornecedores imputados como contas a pagar — sem duplicar registos." },
       { id: "pessoas", integrationNote: "Activos atribuídos ligados ao perfil de cada colaborador — off-boarding inclui checklist automática de devolução." },
     ],
+    screenshot: { light: "/escritorio-light.webp", dark: "/escritorio-dark.webp", alt: "Módulo de Escritório do Bernays — gestão de fornecedores e operações de back-office" },
   },
 
   {
@@ -381,6 +385,7 @@ export const modulePages: ModulePageData[] = [
           "Priorização por prazo e urgência — o mais crítico aparece primeiro, sempre",
         ],
         imageSlotDesc: "Dashboard pessoal: 'As minhas tarefas de hoje' (3-5 itens), 'Aprovações pendentes' (2-3 itens), 'Agenda da semana'. Transmite foco e clareza.",
+        image: { light: "/workspace-cap1-light.webp", dark: "/workspace-cap1-dark.webp", alt: "Dashboard pessoal do Bernays com KPIs, projectos activos e acções rápidas" },
       },
       {
         icon: "Clock",
@@ -391,6 +396,7 @@ export const modulePages: ModulePageData[] = [
           "Registo rápido com atalho de teclado — sem mudar de ecrã ou abrir outra ferramenta",
         ],
         imageSlotDesc: "Interface de registo de horas: projectos activos com input de horas ao lado, sugestões destacadas, timer activo. Total de horas hoje vs. meta diária.",
+        image: { light: "/workspace-cap2-light.webp", dark: "/workspace-cap2-dark.webp", alt: "Registo de horas semanal do Bernays com tarefas por projecto e total de horas" },
       },
       {
         icon: "Inbox",
@@ -401,6 +407,7 @@ export const modulePages: ModulePageData[] = [
           "Acesso a favoritos e recentes — os itens que usas todos os dias estão sempre à mão",
         ],
         imageSlotDesc: "Pesquisa global aberta tipo command palette: resultados por categoria 'Clientes (1)', 'Projectos (3)', 'Faturas (2)'. Interface centrada e limpa.",
+        image: { light: "/workspace-cap3-light.webp", dark: "/workspace-cap3-dark.webp", alt: "Pesquisa global do Bernays com resultados por categoria Growth, Operations e People" },
       },
     ],
     featureGroups: [
@@ -443,6 +450,7 @@ export const modulePages: ModulePageData[] = [
           "Menus, notificações e mensagens de erro em português europeu — sem uma palavra de inglês",
         ],
         imageSlotDesc: "Proposta ou fatura gerada pelo Bernays: documento em PT-PT com tipografia profissional, morada portuguesa, NIF, ATCUD visível. Qualidade documental.",
+        image: { light: "/plataforma-cap1-light.webp", dark: "/plataforma-cap1-light.webp", alt: "Factura gerada pelo Bernays em português europeu com NIF, IVA 23% e totais correctos" },
       },
       {
         icon: "Shield",
@@ -453,16 +461,18 @@ export const modulePages: ModulePageData[] = [
           "Dados isolados por agência com Row-Level Security — zero contaminação cruzada",
         ],
         imageSlotDesc: "Definições de segurança: 2FA activo, sessões activas com dispositivos e datas, logs de auditoria com entradas recentes.",
+        image: { light: "/plataforma-cap2-light.webp", dark: "/plataforma-cap2-dark.webp", alt: "Segurança do Bernays com 2FA, Passkeys, sessões activas e exportação de dados RGPD" },
       },
       {
         icon: "Zap",
-        title: "Infraestrutura que não falha em dia de pitch",
-        desc: "O Bernays corre na Vercel Edge Network com base de dados Neon PostgreSQL. 99.9% de uptime, actualizações sem janelas de manutenção, performance abaixo de 1 segundo em qualquer ecrã. Quando a equipa está a preparar um pitch às 23h, o sistema está lá.",
+        title: "Tudo configurado numa página. Organizado por módulo.",
+        desc: "As definições da agência no Bernays estão organizadas por área — Workspace, Crescimento, Delivery, Financeiro, Pessoas e Conta. Cada responsável acede exactamente às configurações do seu domínio, sem navegar por um painel de admin genérico.",
         bullets: [
-          "Actualizações contínuas sem downtime — nenhuma janela de manutenção que interrompa o trabalho",
-          "Tempo de carregamento abaixo de 1 segundo em todas as páginas",
+          "Identidade da agência, NIF, morada e cor primária num único sítio",
+          "Papéis de utilizador (owner, admin, membro) com convites pendentes visíveis em tempo real",
         ],
-        imageSlotDesc: "Painel de estado com uptime (99.9%), tempo de resposta médio (<1s), registo da última actualização sem downtime.",
+        imageSlotDesc: "Página de Definições com tabs por módulo (Workspace/Crescimento/Delivery/Financeiro/Pessoas/Conta). Cards de configuração organizados dentro de cada tab.",
+        image: { light: "/plataforma-cap3-light.webp", dark: "/plataforma-cap3-dark.webp", alt: "Definições do Bernays organizadas por módulo com Workspace, Crescimento, Delivery e Financeiro" },
       },
     ],
     featureGroups: [
@@ -488,5 +498,6 @@ export const modulePages: ModulePageData[] = [
       { id: "delivery", integrationNote: "Documentos, actas e briefings em PT-PT — sem tradução de volta quando o cliente recebe documentação." },
       { id: "financeiro", integrationNote: "Faturação AT certificada e SAF-T são capacidades da Plataforma em qualquer plano — não add-ons." },
     ],
+    screenshot: { light: "/plataforma-light.webp", dark: "/plataforma-dark.webp", alt: "Definições de segurança do Bernays com 2FA, Passkeys e sessões activas" },
   },
 ]

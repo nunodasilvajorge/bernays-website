@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { FadeIn } from "@/lib/animate"
 import { motion, AnimatePresence } from "framer-motion"
 import { GraduationCap, BookOpen, Users } from "lucide-react"
@@ -23,8 +23,6 @@ const benefits = [
 export function Academia() {
   const [email, setEmail] = useState("")
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle")
-  const emailRef = useRef<HTMLInputElement>(null)
-
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!email || state === "loading") return
@@ -110,7 +108,6 @@ export function Academia() {
                 ) : (
                   <motion.form key="form" onSubmit={handleSubmit} className="flex gap-2">
                     <input
-                      ref={emailRef}
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -177,18 +174,6 @@ export function Academia() {
               <p className="text-[12px] mt-3 leading-snug" style={{ color: "var(--page-text-faint)" }}>
                 Para uso pedagógico em<br />Relações Públicas e Comunicação
               </p>
-              {state !== "success" && (
-                <button
-                  onClick={() => emailRef.current?.focus()}
-                  className="mt-5 w-full inline-flex items-center justify-center gap-1.5 text-[13px] font-semibold py-2.5 rounded-xl border transition-colors duration-150 hover:border-brand/50"
-                  style={{ borderColor: "var(--page-border)", color: "var(--page-text-muted)" }}
-                >
-                  Pedir acesso
-                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M2.5 7H11.5M7.5 3L11.5 7L7.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-              )}
             </motion.div>
           </FadeIn>
 
