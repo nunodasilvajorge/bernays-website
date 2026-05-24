@@ -229,42 +229,22 @@ function CapabilityPanel({
               onClick={() => setLightboxOpen(true)}
               aria-label={`Ver imagem completa: ${cap.image.alt}`}
             >
-              {/* Chrome + image scaled as a unit — chrome anchors the top, content readable below */}
-              <div style={{ transform: "scale(1.55)", transformOrigin: "50% 6%" }}>
-                {/* Browser chrome */}
-                <div
-                  className="flex items-center gap-2.5 px-3 py-2 border-b"
-                  style={{ background: "var(--page-surface)", borderColor: "var(--page-border)" }}
-                >
-                  <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 rounded-full bg-[#ff5f57]" />
-                    <div className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
-                    <div className="w-2 h-2 rounded-full bg-[#28c840]" />
-                  </div>
-                  <div
-                    className="flex-1 max-w-[160px] mx-auto rounded px-2 py-0.5 text-[10px] text-center"
-                    style={{ background: "var(--page-card)", color: "var(--page-text-faint)" }}
-                  >
-                    app.bernays.pt
-                  </div>
-                </div>
-                <Image
-                  src={cap.image.light}
-                  alt={cap.image.alt}
-                  width={960}
-                  height={600}
-                  loading="lazy"
-                  className="w-full block dark:hidden"
-                />
-                <Image
-                  src={cap.image.dark}
-                  alt={cap.image.alt}
-                  width={960}
-                  height={600}
-                  loading="lazy"
-                  className="w-full hidden dark:block"
-                />
-              </div>
+              <Image
+                src={cap.image.light}
+                alt={cap.image.alt}
+                width={960}
+                height={600}
+                loading="lazy"
+                className="w-full block dark:hidden"
+              />
+              <Image
+                src={cap.image.dark}
+                alt={cap.image.alt}
+                width={960}
+                height={600}
+                loading="lazy"
+                className="w-full hidden dark:block"
+              />
               {/* Expand hint on hover */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.04] transition-colors duration-200 flex items-center justify-center">
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold" style={{ background: "rgba(0,0,0,0.65)", color: "#fff" }}>
