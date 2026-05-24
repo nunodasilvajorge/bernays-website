@@ -1,7 +1,7 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion, useInView, AnimatePresence } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -89,6 +89,72 @@ function PainCard({ quote, color }: { quote: string; color: string }) {
   )
 }
 
+function ImageLightbox({
+  image,
+  onClose,
+}: {
+  image: { light: string; dark: string; alt: string }
+  onClose: () => void
+}) {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose() }
+    window.addEventListener("keydown", handler)
+    return () => window.removeEventListener("keydown", handler)
+  }, [onClose])
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden"
+    return () => { document.body.style.overflow = "" }
+  }, [])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.18 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10"
+      style={{ background: "rgba(0,0,0,0.88)", backdropFilter: "blur(10px)" }}
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.97, opacity: 0 }}
+        transition={{ duration: 0.22, ease }}
+        className="relative w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl"
+        style={{ border: "1px solid rgba(255,255,255,0.10)" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Image
+          src={image.light}
+          alt={image.alt}
+          width={1920}
+          height={1200}
+          className="w-full block dark:hidden"
+        />
+        <Image
+          src={image.dark}
+          alt={image.alt}
+          width={1920}
+          height={1200}
+          className="w-full hidden dark:block"
+        />
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-white transition-colors duration-150 hover:bg-white/20"
+          style={{ background: "rgba(0,0,0,0.55)" }}
+          aria-label="Fechar"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M1.5 1.5L10.5 10.5M10.5 1.5L1.5 10.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+          </svg>
+        </button>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 function CapabilityPanel({
   cap,
   index,
@@ -100,6 +166,7 @@ function CapabilityPanel({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-60px" })
+  const [lightboxOpen, setLightboxOpen] = useState(false)
   const Icon = ICON_MAP[cap.icon]
   const reversed = index % 2 === 1
 
@@ -149,30 +216,53 @@ function CapabilityPanel({
       {/* Visual */}
       <div className={reversed ? "md:col-start-1 md:row-start-1" : ""}>
         {cap.image ? (
-          <div
-            className="rounded-2xl overflow-hidden border"
-            style={{
-              borderColor: "rgba(0,0,0,0.08)",
-              boxShadow: "0 2px 0 rgba(0,0,0,0.04), 0 24px 64px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06)",
-            }}
-          >
-            <Image
-              src={cap.image.light}
-              alt={cap.image.alt}
-              width={960}
-              height={600}
-              loading="lazy"
-              className="w-full block dark:hidden"
-            />
-            <Image
-              src={cap.image.dark}
-              alt={cap.image.alt}
-              width={960}
-              height={600}
-              loading="lazy"
-              className="w-full hidden dark:block"
-            />
-          </div>
+          <>
+            <button
+              className="w-full rounded-2xl overflow-hidden border cursor-zoom-in group relative text-left"
+              style={{
+                borderColor: "rgba(0,0,0,0.08)",
+                boxShadow: "0 2px 0 rgba(0,0,0,0.04), 0 24px 64px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06)",
+              }}
+              onClick={() => setLightboxOpen(true)}
+              aria-label={`Ver em detalhe: ${cap.image.alt}`}
+            >
+              <motion.div
+                initial={{ scale: 1.06 }}
+                animate={isInView ? { scale: 1 } : { scale: 1.06 }}
+                transition={{ duration: 0.9, ease }}
+                style={{ willChange: "transform" }}
+              >
+                <Image
+                  src={cap.image.light}
+                  alt={cap.image.alt}
+                  width={960}
+                  height={600}
+                  loading="lazy"
+                  className="w-full block dark:hidden"
+                />
+                <Image
+                  src={cap.image.dark}
+                  alt={cap.image.alt}
+                  width={960}
+                  height={600}
+                  loading="lazy"
+                  className="w-full hidden dark:block"
+                />
+              </motion.div>
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.04] transition-colors duration-200 flex items-end justify-end p-3">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "rgba(0,0,0,0.55)" }}>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M8.5 1.5H12.5V5.5M12.5 1.5L7.5 6.5M5.5 12.5H1.5V8.5M1.5 12.5L6.5 7.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </button>
+            <AnimatePresence>
+              {lightboxOpen && (
+                <ImageLightbox image={cap.image} onClose={() => setLightboxOpen(false)} />
+              )}
+            </AnimatePresence>
+          </>
         ) : (
           <div
             className="rounded-2xl border p-10 flex flex-col justify-start gap-5 min-h-[240px]"
