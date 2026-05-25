@@ -142,6 +142,14 @@ export function Hero() {
             </svg>
           </motion.a>
 
+          <p className="text-[12px] text-slate-400 dark:text-white/20 flex items-center justify-center gap-2 flex-wrap">
+            <span>Sem registo</span>
+            <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/15 inline-block" />
+            <span>Sem cartão de crédito</span>
+            <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/15 inline-block" />
+            <span>Demo com dados reais de agência</span>
+          </p>
+
           {/* Secondary — calendar link */}
           <motion.p
             initial={{ opacity: 0 }}
@@ -159,14 +167,6 @@ export function Hero() {
             </a>
           </motion.p>
         </motion.div>
-
-        <p className="text-[13px] text-slate-400 dark:text-white/20 flex items-center justify-center gap-2 flex-wrap mb-4">
-          <span>Sem registo</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/20 inline-block" />
-          <span>Sem cartão de crédito</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/20 inline-block" />
-          <span>Demo com dados reais de agência</span>
-        </p>
 
         <motion.p
           initial={{ opacity: 0 }}
