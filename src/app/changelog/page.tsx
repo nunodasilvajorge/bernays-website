@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Nav } from "@/components/nav"
 import { Footer } from "@/components/footer"
+import { FloatingCta } from "@/components/floating-cta"
 
 type BadgeType = "Novo" | "Melhoria" | "Fix"
 
@@ -20,6 +21,54 @@ const entries: {
   {
     date: "Maio 2026",
     type: "Novo",
+    title: "Bernays para mobile — PWA",
+    desc: "Usa o Bernays como app no iPhone e Android. Notificações em tempo real, registo de horas no cliente, aprovação de despesas onde estiveres.",
+    link: { label: "Ver funcionalidades", href: "/funcionalidades" },
+  },
+  {
+    date: "Maio 2026",
+    type: "Novo",
+    title: "Acesso com passkey",
+    desc: "Entra no Bernays com Face ID ou impressão digital, sem password. Mais seguro e mais rápido do que qualquer alternativa.",
+  },
+  {
+    date: "Maio 2026",
+    type: "Novo",
+    title: "OCR de recibos por câmara",
+    desc: "Fotografa o recibo com o telemóvel. O Bernays lê, categoriza e submete a despesa em segundos — sem digitar nada.",
+    link: { label: "Módulo Financeiro", href: "/produto/financeiro" },
+  },
+  {
+    date: "Maio 2026",
+    type: "Novo",
+    title: "Propostas colaborativas em tempo real",
+    desc: "Cria e edita propostas em equipa com colaboração em tempo real. Envia por link e recebe assinatura digital — sem Word, sem email, sem sair do Bernays.",
+    link: { label: "Módulo Crescimento", href: "/produto/crescimento" },
+  },
+  {
+    date: "Maio 2026",
+    type: "Novo",
+    title: "Portal de cliente com aprovações",
+    desc: "Os teus clientes acompanham o projecto, aprovam entregáveis e consultam facturas — sem precisar de conta no Bernays.",
+    link: { label: "Módulo Financeiro", href: "/produto/financeiro" },
+  },
+  {
+    date: "Maio 2026",
+    type: "Novo",
+    title: "Faturação recorrente automática",
+    desc: "Configura um retainer uma vez. O Bernays emite e envia a fatura automaticamente todos os meses, sem intervenção manual.",
+    link: { label: "Módulo Financeiro", href: "/produto/financeiro" },
+  },
+  {
+    date: "Maio 2026",
+    type: "Novo",
+    title: "Faturação certificada AT via InvoiceXpress",
+    desc: "Emite facturas conformes com ATCUD, envia ao cliente e exporta para o contabilista — sem sair do Bernays. Integração nativa com InvoiceXpress, com suporte a mais providers em breve.",
+    link: { label: "Módulo Financeiro", href: "/produto/financeiro" },
+  },
+  {
+    date: "Maio 2026",
+    type: "Novo",
     title: "Demo interactiva disponível",
     desc: "Explora todos os módulos com dados reais de uma agência de RP em demo.bernays.pt. Sem registo, sem limite de tempo.",
     link: { label: "Abrir demo", href: "https://demo.bernays.pt" },
@@ -28,15 +77,8 @@ const entries: {
     date: "Maio 2026",
     type: "Novo",
     title: "Bernays lançado em acesso antecipado",
-    desc: "Todos os módulos disponíveis: Crescimento, Delivery, Financeiro, Pessoas, Escritório, Workspace e Plataforma. Demo interactiva com dados reais de uma agência.",
+    desc: "Todos os módulos disponíveis: Crescimento, Delivery, Financeiro, Pessoas, Escritório, Workspace e Plataforma.",
     link: { label: "Ver módulos", href: "/funcionalidades" },
-  },
-  {
-    date: "Maio 2026",
-    type: "Novo",
-    title: "Faturação certificada AT com ATCUD nativo",
-    desc: "Faturas com ATCUD gerado automaticamente, SAF-T para exportação ao contabilista e validação em tempo real. Sem InvoiceXpress separado.",
-    link: { label: "Módulo Financeiro", href: "/produto/financeiro" },
   },
   {
     date: "Maio 2026",
@@ -51,6 +93,7 @@ export default function ChangelogPage() {
   return (
     <main style={{ background: "var(--page-bg)" }}>
       <Nav />
+      <FloatingCta />
 
       <div className="max-w-5xl mx-auto px-6 pt-32 pb-24">
 
@@ -77,7 +120,7 @@ export default function ChangelogPage() {
               className="text-[17px] leading-relaxed max-w-2xl"
               style={{ color: "var(--page-text-muted)" }}
             >
-              Actualizações de produto, melhorias e novas funcionalidades.
+              O Bernays entrou em acesso antecipado em Maio de 2026. Todas as actualizações, funcionalidades lançadas e melhorias ficam registadas aqui.
             </p>
           </div>
         </div>
@@ -100,8 +143,8 @@ export default function ChangelogPage() {
                     <div
                       className="w-[15px] h-[15px] rounded-full border-2 shrink-0 mt-1 z-10"
                       style={{
-                        background: "var(--page-bg)",
-                        borderColor: idx === 0 ? "oklch(0.581 0.243 263)" : "var(--page-border)",
+                        background: idx === 0 ? badge.color : "var(--page-bg)",
+                        borderColor: badge.color,
                       }}
                     />
 

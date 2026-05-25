@@ -128,7 +128,7 @@ export function FeatureTabs() {
               aria-label={t.label}
               aria-selected={active === i}
               role="tab"
-              className="relative flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 shrink-0 flex-1 justify-center min-w-0"
+              className="relative flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 shrink-0 flex-1 justify-center min-w-0 hover:bg-black/[0.04] dark:hover:bg-white/[0.04]"
               style={{
                 background: active === i ? "var(--page-bg)" : "transparent",
                 color: active === i ? t.color : "var(--page-text-faint)",
@@ -205,7 +205,7 @@ export function FeatureTabs() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.99 }}
               transition={{ duration: 0.3, ease }}
-              className="rounded-2xl overflow-hidden border shadow-[0_24px_64px_rgba(0,0,0,0.15)] dark:shadow-[0_24px_64px_rgba(0,0,0,0.55)]"
+              className="rounded-2xl overflow-hidden border shadow-[0_24px_64px_rgba(0,0,0,0.15)] dark:shadow-[0_24px_64px_rgba(0,0,0,0.55)] group"
               style={{ borderColor: "var(--page-border)" }}
             >
               <div className="relative overflow-hidden" style={{ maxHeight: "380px" }}>
@@ -215,7 +215,7 @@ export function FeatureTabs() {
                   alt={tab.label}
                   width={1440}
                   height={900}
-                  className="w-full object-cover object-top block dark:hidden"
+                  className="w-full object-cover object-top block dark:hidden transition-transform duration-500 ease-out group-hover:scale-[1.02]"
                   style={{ maxHeight: "380px" }}
                 />
                 <Image
@@ -224,7 +224,7 @@ export function FeatureTabs() {
                   alt={tab.label}
                   width={1440}
                   height={900}
-                  className="w-full object-cover object-top hidden dark:block"
+                  className="w-full object-cover object-top hidden dark:block transition-transform duration-500 ease-out group-hover:scale-[1.02]"
                   style={{ maxHeight: "380px" }}
                 />
                 <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white dark:from-[#07080e] to-transparent pointer-events-none" />

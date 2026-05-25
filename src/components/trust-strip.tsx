@@ -1,5 +1,8 @@
 "use client"
 
+import { motion } from "framer-motion"
+import { useState } from "react"
+
 const logos = [
   {
     name: "AT · ATCUD",
@@ -42,6 +45,8 @@ const logos = [
 ]
 
 export function TrustStrip() {
+  const [hovered, setHovered] = useState<string | null>(null)
+
   return (
     <section
       className="border-y py-8 px-6"
@@ -56,16 +61,24 @@ export function TrustStrip() {
         </p>
         <div className="flex items-center justify-center gap-10 md:gap-16 flex-wrap">
           {logos.map((logo) => (
-            <div
+            <motion.div
               key={logo.name}
-              className="flex flex-col items-center gap-1.5 group transition-all duration-200"
-              style={{ opacity: 0.38 }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.75")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.38")}
+              className="flex flex-col items-center gap-1.5 cursor-default"
+              whileHover={{ scale: 1.08 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              onHoverStart={() => setHovered(logo.name)}
+              onHoverEnd={() => setHovered(null)}
+              style={{
+                opacity: hovered === logo.name ? 1 : 0.38,
+                transition: "opacity 0.2s",
+              }}
             >
               <div
                 className="text-slate-900 dark:text-white"
-                style={{ filter: "grayscale(1)" }}
+                style={{
+                  filter: hovered === logo.name ? "grayscale(0)" : "grayscale(1)",
+                  transition: "filter 0.2s",
+                }}
               >
                 {logo.svg}
               </div>
@@ -75,7 +88,7 @@ export function TrustStrip() {
               >
                 {logo.sub}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

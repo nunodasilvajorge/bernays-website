@@ -9,7 +9,7 @@ export default function NotFound() {
     <main style={{ background: "var(--page-bg)" }}>
       <Nav />
 
-      <div className="min-h-[80vh] flex flex-col items-center justify-center px-6 text-center">
+      <div className="relative overflow-hidden min-h-[80vh] flex flex-col items-center justify-center px-6 text-center">
         {/* Atmospheric glow */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -53,7 +53,7 @@ export default function NotFound() {
               href={DEMO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border font-semibold px-6 py-3 rounded-xl text-[15px] transition-colors duration-150"
+              className="inline-flex items-center gap-2 border font-semibold px-6 py-3 rounded-xl text-[15px] transition-colors duration-150 hover:text-brand hover:border-brand/40"
               style={{ borderColor: "var(--page-border)", color: "var(--page-text-muted)" }}
             >
               Ver demo

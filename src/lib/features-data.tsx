@@ -50,6 +50,7 @@ export const modules: Module[] = [
       { title: "Relatório de pipeline", desc: "Fotografia completa em qualquer momento: deals por etapa, valor total, responsável e probabilidade ponderada." },
       { title: "Reuniões integradas", desc: "Reuniões associadas a deals ou clientes com acta, decisões e follow-ups registados — contexto sempre disponível." },
       { title: "Importação de contactos", desc: "Migra a lista de contactos existente sem perder um campo. Começa com o histórico que já tens." },
+      { title: "Propostas colaborativas com e-signature", desc: "Cria e edita propostas em equipa em tempo real. Envia por link, recebe assinatura digital — sem Word, sem email." },
     ],
   },
   {
@@ -88,7 +89,7 @@ export const modules: Module[] = [
     description:
       "Não é contabilidade — é inteligência financeira em tempo real. O módulo Financeiro cobre faturação certificada AT, retainers automáticos, cobranças, P&L por cliente e exportação SAF-T. O objectivo é claro: que o sócio saiba exactamente quanto a agência ganha — por cliente, por projecto, por mês — sem esperar pelo fim do trimestre.",
     features: [
-      { title: "Faturação certificada AT", desc: "Faturas com ATCUD via InvoiceXpress — conformidade legal garantida sem processos manuais nem ferramentas externas." },
+      { title: "Faturação certificada AT via InvoiceXpress", desc: "Emite facturas conformes com ATCUD. Integração nativa com InvoiceXpress — sem configuração manual, sem risco de incumprimento." },
       { title: "Retainers automáticos", desc: "Configuras uma vez; o Bernays emite mensalmente. Retainer nunca esquecido, cliente nunca surpreendido." },
       { title: "P&L por cliente", desc: "Receita, custo e margem de cada conta num único ecrã — sabes quais os clientes que sustentam a agência e quais os que a drenam." },
       { title: "Cashflow em tempo real", desc: "Previsão de tesouraria actualizada com o que está emitido, o que está pago e o que está em atraso. Sem surpresas no final do mês." },
@@ -104,6 +105,7 @@ export const modules: Module[] = [
       { title: "Notas de crédito", desc: "Emissão directa na plataforma — correcções de faturação resolvidas em segundos, com rastreio completo." },
       { title: "Proformas", desc: "Documento de pré-faturação enviado antes da prestação — útil para clientes que exigem aprovação interna antes de pagar." },
       { title: "Centros de custo", desc: "Agrupamento de despesas por departamento ou área — controlo granular para agências com estrutura de negócio diversificada." },
+      { title: "Portal de cliente", desc: "O teu cliente acompanha o projecto, aprova entregáveis e consulta facturas — sem precisar de conta no Bernays." },
     ],
   },
   {
@@ -115,7 +117,7 @@ export const modules: Module[] = [
     description:
       "Toda a área de recursos humanos numa única plataforma. Da contratação à avaliação de performance, passando por férias, capacidade, competências e desenvolvimento de carreira. O módulo de Pessoas garante que o sócio sabe sempre quem está disponível, quem está sobrecarregado e como a equipa está a crescer.",
     features: [
-      { title: "Planeamento de capacidade", desc: "Horas disponíveis vs. alocadas por consultor — antes de aceitar um novo cliente, sabes se tens equipa para isso." },
+      { title: "Alocação da equipa", desc: "Vista agregada de horas alocadas por consultor e projecto — decisão de capacidade baseada em dados, não em intuição." },
       { title: "Disponibilidade em tempo real", desc: "Quem está disponível, em reunião, de férias ou a trabalhar remotamente — sem ter de perguntar a ninguém." },
       { title: "Pedidos de férias", desc: "Fluxo de aprovação integrado com calendário partilhado — ausências aprovadas, registadas e visíveis para toda a equipa." },
       { title: "Matriz de competências", desc: "Skills e especializações por consultor — aloca o profissional certo ao cliente certo, com dados em vez de intuição." },

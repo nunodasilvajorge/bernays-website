@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { TrendingUp, Users, Clock } from "lucide-react"
 import { FadeIn } from "@/lib/animate"
+import { useRef, useState } from "react"
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -45,6 +46,81 @@ const personas = [
   },
 ]
 
+function PersonaCard({ p, delay }: { p: typeof personas[0]; delay: number }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [spot, setSpot] = useState<{ x: number; y: number } | null>(null)
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -4, scale: 1.01 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay, ease }}
+      className="group relative overflow-hidden rounded-2xl border p-6 flex flex-col cursor-default"
+      style={{ background: "var(--page-card)", borderColor: "var(--page-border)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+      onMouseMove={(e) => {
+        const rect = cardRef.current?.getBoundingClientRect()
+        if (!rect) return
+        setSpot({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = `${p.color}55`
+        e.currentTarget.style.boxShadow = `0 0 32px ${p.color}18, 0 8px 32px rgba(0,0,0,0.08)`
+      }}
+      onMouseLeave={(e) => {
+        setSpot(null)
+        e.currentTarget.style.borderColor = "var(--page-border)"
+        e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)"
+      }}
+    >
+      {spot && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{ background: `radial-gradient(280px circle at ${spot.x}px ${spot.y}px, ${p.color}14 0%, transparent 70%)` }}
+        />
+      )}
+
+      <div className="relative z-[1] flex flex-col h-full">
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 shrink-0"
+          style={{ background: `${p.color}18`, color: p.color }}
+        >
+          {p.icon}
+        </div>
+
+        <h3 className="text-[16px] font-bold mb-2" style={{ color: "var(--page-text)" }}>
+          {p.role}
+        </h3>
+
+        <p className="text-[13px] font-medium italic mb-4 leading-snug" style={{ color: p.color }}>
+          &ldquo;{p.pain}&rdquo;
+        </p>
+
+        <p className="text-[13px] leading-relaxed mb-6" style={{ color: "var(--page-text-muted)" }}>
+          {p.desc}
+        </p>
+
+        <ul className="space-y-2.5 mt-auto">
+          {p.features.map((f) => (
+            <li key={f} className="flex items-start gap-2.5 text-[13px]" style={{ color: "var(--page-text-muted)" }}>
+              <div
+                className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                style={{ background: `${p.color}18` }}
+              >
+                <div className="w-1.5 h-1.5 rounded-full" style={{ background: p.color }} />
+              </div>
+              {f}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  )
+}
+
 export function Personas() {
   return (
     <section className="py-16 md:py-28 px-6" style={{ background: "var(--page-bg)" }}>
@@ -65,74 +141,14 @@ export function Personas() {
               Toda a agência.
             </span>
           </h2>
-          <p
-            className="text-[16px] mt-4 leading-relaxed max-w-xl"
-            style={{ color: "var(--page-text-muted)" }}
-          >
+          <p className="text-[16px] mt-4 leading-relaxed max-w-xl" style={{ color: "var(--page-text-muted)" }}>
             Cada função vê o que precisa e faz o que deve — sem fricção, sem ferramentas extra.
           </p>
         </FadeIn>
 
         <div className="grid md:grid-cols-3 gap-5">
           {personas.map((p, i) => (
-            <motion.div
-              key={p.role}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease }}
-              className="rounded-2xl border p-6 flex flex-col"
-              style={{ background: "var(--page-card)", borderColor: "var(--page-border)", transition: "border-color 0.2s, box-shadow 0.2s" }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.borderColor = `${p.color}55`
-                el.style.boxShadow = `0 0 40px ${p.color}10`
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.borderColor = "var(--page-border)"
-                el.style.boxShadow = "none"
-              }}
-            >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 shrink-0"
-                style={{ background: `${p.color}18`, color: p.color }}
-              >
-                {p.icon}
-              </div>
-
-              <h3 className="text-[16px] font-bold mb-2" style={{ color: "var(--page-text)" }}>
-                {p.role}
-              </h3>
-
-              <p
-                className="text-[13px] font-medium italic mb-4 leading-snug"
-                style={{ color: p.color }}
-              >
-                &ldquo;{p.pain}&rdquo;
-              </p>
-
-              <p
-                className="text-[13px] leading-relaxed mb-6"
-                style={{ color: "var(--page-text-muted)" }}
-              >
-                {p.desc}
-              </p>
-
-              <ul className="space-y-2.5 mt-auto">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-[13px]" style={{ color: "var(--page-text-muted)" }}>
-                    <div
-                      className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5"
-                      style={{ background: `${p.color}18` }}
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full" style={{ background: p.color }} />
-                    </div>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+            <PersonaCard key={p.role} p={p} delay={i * 0.08} />
           ))}
         </div>
       </div>

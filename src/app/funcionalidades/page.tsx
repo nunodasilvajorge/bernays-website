@@ -39,7 +39,7 @@ function FeatureCard({ title, desc, color, index, inView }: {
         </p>
         <p
           className="text-[12px] leading-relaxed"
-          style={{ color: "var(--page-text-faint)" }}
+          style={{ color: "var(--page-text-muted)" }}
         >
           {desc}
         </p>
@@ -99,7 +99,7 @@ function ModuleSection({ mod, index }: { mod: Module; index: number }) {
         </p>
         <Link
           href={`/produto/${mod.id}`}
-          className="inline-flex items-center gap-1.5 text-[13px] font-semibold mt-3 transition-opacity duration-150 hover:opacity-70"
+          className="inline-flex items-center gap-1.5 text-[13px] font-semibold mt-3 transition-colors duration-150 hover:brightness-[0.75]"
           style={{ color: mod.color }}
         >
           Ver em detalhe
@@ -277,8 +277,11 @@ export default function FuncionalidadesPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.45, ease }}
-          className="mt-12 rounded-2xl border p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-          style={{ background: "var(--page-card)", borderColor: "var(--page-border)" }}
+          className="mt-12 rounded-2xl border p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          style={{
+            background: "linear-gradient(135deg, oklch(0.581 0.243 263 / 0.07) 0%, oklch(0.581 0.243 263 / 0.03) 100%)",
+            borderColor: "oklch(0.581 0.243 263 / 0.15)",
+          }}
         >
           <div>
             <p
@@ -296,7 +299,7 @@ export default function FuncionalidadesPage() {
           </div>
           <a
             href={DEMO_URL}
-            className="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-semibold px-5 py-2.5 rounded-xl text-[14px] transition-colors duration-150 shrink-0"
+            className="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-semibold px-6 py-3 rounded-xl text-[15px] transition-colors duration-150 shrink-0"
           >
             Ver na prática
             <ArrowRight size={14} />

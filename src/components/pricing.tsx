@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Check } from "lucide-react"
 import { FadeIn } from "@/lib/animate"
@@ -26,6 +26,7 @@ function calcTeam(users: number, annual: boolean) {
 }
 
 const included = [
+  "Faturação certificada AT via InvoiceXpress (ATCUD incluído)",
   "CRM completo: pipeline, propostas e aceitação digital",
   "Delivery: projetos, tarefas e timesheets integrados",
   "Faturação recorrente e gestão de cobranças",
@@ -44,6 +45,10 @@ const included = [
 export function Pricing() {
   const [annual, setAnnual] = useState(false)
   const [teamUsers, setTeamUsers] = useState(5)
+  const refSolo = useRef<HTMLDivElement>(null)
+  const refAgency = useRef<HTMLDivElement>(null)
+  const [spotSolo, setSpotSolo] = useState<{ x: number; y: number } | null>(null)
+  const [spotAgency, setSpotAgency] = useState<{ x: number; y: number } | null>(null)
 
   const sliderPct = ((teamUsers - MIN_USERS) / (MAX_USERS - MIN_USERS)) * 100
   const team = calcTeam(teamUsers, annual)
@@ -86,13 +91,33 @@ export function Pricing() {
         <div className="grid md:grid-cols-3 gap-5 mb-14">
           {/* Solo */}
           <motion.div
+            ref={refSolo}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -4 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl p-6 border flex flex-col"
-            style={{ background: "var(--page-card)", borderColor: "var(--page-border)" }}
+            className="relative overflow-hidden rounded-2xl p-6 border flex flex-col cursor-default"
+            style={{ background: "var(--page-card)", borderColor: "var(--page-border)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+            onMouseMove={(e) => {
+              const rect = refSolo.current?.getBoundingClientRect()
+              if (!rect) return
+              setSpotSolo({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "#2257ff55"
+              e.currentTarget.style.boxShadow = "0 0 32px #2257ff18, 0 8px 32px rgba(0,0,0,0.08)"
+            }}
+            onMouseLeave={(e) => {
+              setSpotSolo(null)
+              e.currentTarget.style.borderColor = "var(--page-border)"
+              e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)"
+            }}
           >
+            {spotSolo && (
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: `radial-gradient(280px circle at ${spotSolo.x}px ${spotSolo.y}px, #2257ff14 0%, transparent 70%)` }} />
+            )}
+            <div className="relative z-[1] flex flex-col flex-1">
             <div className="mb-5">
               <h3 className="text-[17px] font-bold text-slate-900 dark:text-white mb-1">Solo / Studio</h3>
               <p className="text-[13px] text-slate-500 dark:text-white/45 leading-snug">
@@ -142,6 +167,7 @@ export function Pricing() {
             >
               Ver demo primeiro →
             </a>
+            </div>
           </motion.div>
 
           {/* Team — highlighted with calculator */}
@@ -276,13 +302,33 @@ export function Pricing() {
 
           {/* Agency */}
           <motion.div
+            ref={refAgency}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -4 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl p-6 border flex flex-col"
-            style={{ background: "var(--page-card)", borderColor: "var(--page-border)" }}
+            className="relative overflow-hidden rounded-2xl p-6 border flex flex-col cursor-default"
+            style={{ background: "var(--page-card)", borderColor: "var(--page-border)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+            onMouseMove={(e) => {
+              const rect = refAgency.current?.getBoundingClientRect()
+              if (!rect) return
+              setSpotAgency({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "#2257ff55"
+              e.currentTarget.style.boxShadow = "0 0 32px #2257ff18, 0 8px 32px rgba(0,0,0,0.08)"
+            }}
+            onMouseLeave={(e) => {
+              setSpotAgency(null)
+              e.currentTarget.style.borderColor = "var(--page-border)"
+              e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)"
+            }}
           >
+            {spotAgency && (
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: `radial-gradient(280px circle at ${spotAgency.x}px ${spotAgency.y}px, #2257ff14 0%, transparent 70%)` }} />
+            )}
+            <div className="relative z-[1] flex flex-col flex-1">
             <div className="mb-5">
               <h3 className="text-[17px] font-bold text-slate-900 dark:text-white mb-1">Agency</h3>
               <p className="text-[13px] text-slate-500 dark:text-white/45 leading-snug">
@@ -324,6 +370,7 @@ export function Pricing() {
             >
               Ver demo primeiro →
             </a>
+            </div>
           </motion.div>
         </div>
 

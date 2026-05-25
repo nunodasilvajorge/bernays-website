@@ -4,7 +4,6 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.bernays.pt"
 const DEMO_URL = process.env.NEXT_PUBLIC_DEMO_URL ?? "https://demo.bernays.pt"
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -153,15 +152,21 @@ export function Hero() {
           >
             Preferes uma conversa?{" "}
             <a
-              href="https://calendly.com/nuno-dasilvajorge/15m"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/agenda"
               className="text-brand hover:underline font-medium"
             >
               Marcar 15 min com o Nuno →
             </a>
           </motion.p>
         </motion.div>
+
+        <p className="text-[13px] text-slate-400 dark:text-white/20 flex items-center justify-center gap-2 flex-wrap mb-4">
+          <span>Sem registo</span>
+          <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/20 inline-block" />
+          <span>Sem cartão de crédito</span>
+          <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/20 inline-block" />
+          <span>Demo com dados reais de agência</span>
+        </p>
 
         <motion.p
           initial={{ opacity: 0 }}
@@ -269,16 +274,16 @@ export function Hero() {
       {/* Section transition: brand glow seam */}
       <div className="absolute bottom-0 left-0 right-0 h-px pointer-events-none" style={{ background: "linear-gradient(90deg, transparent 0%, oklch(0.581 0.243 263 / 0.35) 40%, oklch(0.581 0.243 263 / 0.35) 60%, transparent 100%)" }} />
 
-      {/* Scroll indicator — static */}
-      <div
+      {/* Scroll indicator */}
+      <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1.5 pointer-events-none"
-        style={{ opacity: useTransform(scrollY, [0, 120], [1, 0]) as unknown as number }}
+        style={{ opacity: useTransform(scrollY, [0, 120], [1, 0]) }}
       >
         <span className="text-[11px] font-medium tracking-widest uppercase text-slate-400 dark:text-white/25">Scroll</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-slate-400 dark:text-white/25">
           <path d="M8 3V13M4 9L8 13L12 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-      </div>
+      </motion.div>
     </section>
   )
 }

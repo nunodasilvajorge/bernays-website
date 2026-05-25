@@ -1,9 +1,13 @@
 "use client"
 
+import { motion } from "framer-motion"
+import { useRef, useState } from "react"
 import { FadeIn } from "@/lib/animate"
 import { ArrowRight } from "lucide-react"
 
 const DEMO_URL = process.env.NEXT_PUBLIC_DEMO_URL ?? "https://demo.bernays.pt"
+const ease = [0.22, 1, 0.36, 1] as const
+const color = "#2257ff"
 
 const steps = [
   {
@@ -22,6 +26,61 @@ const steps = [
     body: "Sem formação obrigatória. O Bernays foi feito para ser óbvio — o teu Excel vai para a gaveta.",
   },
 ]
+
+function StepCard({ step, delay }: { step: typeof steps[0]; delay: number }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [spot, setSpot] = useState<{ x: number; y: number } | null>(null)
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -4, scale: 1.01 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay, ease }}
+      className="relative overflow-hidden rounded-2xl border p-8 cursor-default"
+      style={{ background: "var(--page-surface)", borderColor: "var(--page-border)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+      onMouseMove={(e) => {
+        const rect = cardRef.current?.getBoundingClientRect()
+        if (!rect) return
+        setSpot({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = `${color}40`
+        e.currentTarget.style.boxShadow = `0 0 32px ${color}15, 0 8px 32px rgba(0,0,0,0.08)`
+      }}
+      onMouseLeave={(e) => {
+        setSpot(null)
+        e.currentTarget.style.borderColor = "var(--page-border)"
+        e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)"
+      }}
+    >
+      {spot && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{ background: `radial-gradient(280px circle at ${spot.x}px ${spot.y}px, ${color}10 0%, transparent 70%)` }}
+        />
+      )}
+      <div className="relative z-[1]">
+        <div
+          className="text-[80px] font-extrabold leading-none mb-5 select-none"
+          style={{ fontFamily: "var(--font-display)", color: "oklch(0.581 0.243 263 / 0.12)" }}
+          aria-hidden="true"
+        >
+          {step.n}
+        </div>
+        <h3 className="text-[18px] font-bold text-slate-900 dark:text-white mb-2 leading-snug">
+          {step.title}
+        </h3>
+        <p className="text-[14px] text-slate-500 dark:text-white/45 leading-relaxed">
+          {step.body}
+        </p>
+      </div>
+    </motion.div>
+  )
+}
 
 export function Migration() {
   return (
@@ -46,31 +105,13 @@ export function Migration() {
           </p>
         </FadeIn>
 
-        <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x" style={{ borderColor: "var(--page-border)" }}>
+        <div className="grid md:grid-cols-3 gap-5">
           {steps.map((step, i) => (
-            <FadeIn key={step.n} delay={i * 0.1} className="relative px-0 md:px-10 py-8 md:py-0 first:pl-0 last:pr-0">
-              {/* Ghost number */}
-              <div
-                className="text-[88px] font-extrabold leading-none mb-4 select-none"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  color: "oklch(0.581 0.243 263 / 0.14)",
-                }}
-                aria-hidden="true"
-              >
-                {step.n}
-              </div>
-              <h3 className="text-[18px] font-bold text-slate-900 dark:text-white mb-2 leading-snug">
-                {step.title}
-              </h3>
-              <p className="text-[14px] text-slate-500 dark:text-white/45 leading-relaxed">
-                {step.body}
-              </p>
-            </FadeIn>
+            <StepCard key={step.n} step={step} delay={i * 0.1} />
           ))}
         </div>
 
-        <FadeIn className="mt-12 text-center">
+        <FadeIn className="mt-12">
           <a
             href={DEMO_URL}
             className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-brand hover:underline underline-offset-4 transition-all"

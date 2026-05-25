@@ -3,7 +3,6 @@ import Image from "next/image"
 import { Search, Monitor, MessageSquare, ArrowRight } from "lucide-react"
 import { Nav } from "@/components/nav"
 import { Footer } from "@/components/footer"
-
 const DEMO_URL = process.env.NEXT_PUBLIC_DEMO_URL ?? "https://demo.bernays.pt"
 const CALENDLY_URL = "https://calendly.com/nuno-dasilvajorge/15m"
 
@@ -20,7 +19,7 @@ const bullets = [
   },
   {
     Icon: MessageSquare,
-    title: "Respondes às tuas dúvidas",
+    title: "Esclareço as tuas dúvidas",
     desc: "O tempo é teu. Sem pressão de fecho, sem script.",
   },
 ]
@@ -71,7 +70,7 @@ export default function AgendaPage() {
           <div>
             <p
               className="text-sm font-semibold tracking-widest uppercase mb-7"
-              style={{ color: "var(--page-text-faint)" }}
+              style={{ color: "var(--page-text-muted)" }}
             >
               O que acontece na chamada
             </p>
@@ -139,7 +138,7 @@ export default function AgendaPage() {
 
         {/* Bottom — self-serve link */}
         <div
-          className="text-center mt-16 pt-8 border-t"
+          className="mt-16 pt-8 border-t"
           style={{ borderColor: "var(--page-border)" }}
         >
           <p className="text-[14px] mb-2" style={{ color: "var(--page-text-faint)" }}>

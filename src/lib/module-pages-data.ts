@@ -1,5 +1,6 @@
 export type PainScenario = {
   quote: string
+  role?: string
 }
 
 export type Capability = {
@@ -33,9 +34,9 @@ export const modulePages: ModulePageData[] = [
     headline: "O pipeline que diz a verdade — mesmo quando o negócio parece correr bem.",
     lead: "A maioria das agências de RP sabe o que faturou no mês passado. Poucas sabem o que está prestes a entrar — e quase nenhuma sabe onde vai perder o próximo negócio. O módulo de Crescimento traz visibilidade real ao processo comercial: do primeiro contacto à proposta aceite, com forecast que reflecte probabilidade honesta, não optimismo de fim de trimestre.",
     painPoints: [
-      { quote: "A proposta estava boa — mandámos por email há três semanas e nunca mais houve resposta. Ninguém fez follow-up porque ninguém sabia de quem era a responsabilidade." },
-      { quote: "Fechámos o trimestre com menos 18% do que esperávamos. O pipeline parecia sólido, mas metade dos deals estavam empatados há dois meses sem próximos passos definidos." },
-      { quote: "O nosso cliente mais antigo não renovou. Não porque estava insatisfeito — porque ninguém activou o processo de renovação a tempo e ele já tinha assinado com outro." },
+      { quote: "A proposta estava boa — mandámos por email há três semanas e nunca mais houve resposta. Ninguém fez follow-up porque ninguém sabia de quem era a responsabilidade.", role: "Sócio de agência" },
+      { quote: "Fechámos o trimestre com menos 18% do que esperávamos. O pipeline parecia sólido, mas metade dos deals estavam empatados há dois meses sem próximos passos definidos.", role: "Directora Comercial" },
+      { quote: "O nosso cliente mais antigo não renovou. Não porque estava insatisfeito — porque ninguém activou o processo de renovação a tempo e ele já tinha assinado com outro.", role: "Gestor de Conta Sénior" },
     ],
     capabilities: [
       {
@@ -71,6 +72,17 @@ export const modulePages: ModulePageData[] = [
         imageSlotDesc: "Split deal→projecto: deal 'Ganho' à esquerda, projecto criado com mesmo cliente e orçamento à direita.",
         image: { light: "/crescimento-cap3-light.webp", dark: "/crescimento-cap3-dark.webp", alt: "Deal ganho no Bernays com projecto criado automaticamente em Entidades Ligadas" },
       },
+      {
+        icon: "Users",
+        title: "Da proposta ao projecto, sem sair do Bernays.",
+        desc: "Cria a proposta directamente na plataforma. Edita em equipa em tempo real — como no Google Docs, mas integrado no CRM. Envia ao cliente por link, ele assina digitalmente. Quando é aprovada, o projecto é criado automaticamente.",
+        bullets: [
+          "Edição colaborativa em tempo real com a equipa",
+          "Envio por link com e-signature integrada",
+          "Criação automática de projecto após aprovação",
+          "Histórico completo de versões e aprovações",
+        ],
+      },
     ],
     featureGroups: [
       {
@@ -98,15 +110,15 @@ export const modulePages: ModulePageData[] = [
     headline: "Sabes quantas horas custou o cliente. Antes de lhe enviares a próxima fatura.",
     lead: "A rentabilidade de uma agência de RP forma-se hora a hora, projecto a projecto. Mas na maior parte das agências, esse cálculo só aparece no fim do mês — quando já é tarde para corrigir. O módulo de Delivery transforma cada hora registada em custo real visível, para que o gestor de conta saiba a margem actual do projecto antes de a perder.",
     painPoints: [
-      { quote: "O projecto custou-nos o dobro do que estava orçamentado. Só percebemos quando o cliente recusou pagar horas extra que 'nunca foram acordadas' — e a verdade é que nunca tínhamos contado as horas com rigor." },
-      { quote: "A consultora júnior tinha oito projectos atribuídos, dois em atraso e uma apresentação para amanhã que ninguém tinha visto. Só soubemos na reunião de manhã." },
-      { quote: "O cliente pediu aprovação para o comunicado na semana passada. Houve três versões por email, dois esquecimentos e no final não temos a certeza de qual foi a aprovada." },
+      { quote: "O projecto custou-nos o dobro do que estava orçamentado. Só percebemos quando o cliente recusou pagar horas extra que 'nunca foram acordadas' — e a verdade é que nunca tínhamos contado as horas com rigor.", role: "Sócia de agência de RP" },
+      { quote: "A consultora júnior tinha oito projectos atribuídos, dois em atraso e uma apresentação para amanhã que ninguém tinha visto. Só soubemos na reunião de manhã.", role: "Directora de Operações" },
+      { quote: "O cliente pediu aprovação para o comunicado na semana passada. Houve três versões por email, dois esquecimentos e no final não temos a certeza de qual foi a aprovada.", role: "Gestora de Conta Sénior" },
     ],
     capabilities: [
       {
         icon: "BarChart2",
-        title: "Rentabilidade visível antes do fim do mês",
-        desc: "Cada hora registada por um consultor converte-se imediatamente em custo real do projecto. O gestor vê o orçamento consumido vs. horas restantes em tempo real — não numa exportação de Excel feita no último dia do mês.",
+        title: "Rentabilidade de cada projecto, actualizada ao minuto",
+        desc: "Cada hora registada por um consultor converte-se imediatamente em custo real do projecto. O gestor vê o orçamento consumido vs. horas restantes em tempo real — sem esperar pelo fim do mês, sem exportar para Excel.",
         bullets: [
           "Semáforo por projecto: verde/amarelo/vermelho baseado em percentagem de orçamento consumido",
           "Custo por hora configurável por consultor — margem real por pessoa, não estimativa média",
@@ -127,8 +139,8 @@ export const modulePages: ModulePageData[] = [
       },
       {
         icon: "Globe",
-        title: "Portal do cliente sem partilha de Drives",
-        desc: "O cliente revê e aprova conteúdos directamente no portal do Bernays. Sem links de Google Drive partilhados que expiram, sem versões de ficheiros perdidas no email, sem 'já aprovámos isso?' sem resposta definitiva.",
+        title: "Portal do cliente com aprovações rastreadas",
+        desc: "O cliente revê e aprova conteúdos directamente no portal do Bernays — com histórico de versões, estado de aprovação e actas associadas ao projecto. Sem links de Drive partilhados que expiram, sem versões perdidas no email.",
         bullets: [
           "Histórico de versões por deliverable — qual a versão aprovada, quando e por quem",
           "Actas de reunião associadas ao projecto — decisões registadas e acessíveis para toda a equipa",
@@ -144,15 +156,11 @@ export const modulePages: ModulePageData[] = [
       },
       {
         label: "Planeamento e execução",
-        featureTitles: ["Tarefas e deadlines", "Vista Gantt", "Kanban de tarefas", "Milestones e dependências", "Templates de projecto", "Briefings e deliverables"],
+        featureTitles: ["Tarefas e deadlines", "Vista Gantt", "Kanban de tarefas", "Milestones e dependências", "Templates de projecto", "Briefings e deliverables", "De proposta a fatura"],
       },
       {
         label: "Colaboração e aprovação",
         featureTitles: ["Aprovação de deliverables", "Portal do cliente", "Actas de reunião", "Gestão de documentos"],
-      },
-      {
-        label: "Ligações entre módulos",
-        featureTitles: ["De proposta a fatura"],
       },
     ],
     relatesTo: [
@@ -168,14 +176,14 @@ export const modulePages: ModulePageData[] = [
     headline: "Sabes quais os clientes que te estão a custar dinheiro — antes de perder a margem.",
     lead: "A maior armadilha financeira de uma agência de RP não é um cliente que não paga — é um cliente que paga e que, no entanto, drena margem silenciosamente. O módulo Financeiro dá ao sócio o P&L por cliente em tempo real, retainers gerados sem intervenção manual, e faturação certificada AT sem ferramentas externas.",
     painPoints: [
-      { quote: "O nosso cliente de retainer mais antigo — três anos de contrato — estava a render menos 40% do que calculávamos. Descobrimos quando o contabilista fechou o ano. Até lá, estávamos a subsidiar o trabalho sem saber." },
-      { quote: "No fim de cada mês, a sócia passava duas horas a criar faturas manualmente no InvoiceXpress, verificar quais os retainers que tinham saído e reconciliar os pagamentos recebidos." },
-      { quote: "O cliente ficou em silêncio durante semanas. Descobrimos que estava retido por uma fatura de 60 dias que ninguém tinha perseguido — porque o processo de cobranças dependia da memória de alguém." },
+      { quote: "O nosso cliente de retainer mais antigo — três anos de contrato — estava a render menos 40% do que calculávamos. Descobrimos quando o contabilista fechou o ano. Até lá, estávamos a subsidiar o trabalho sem saber.", role: "Sócio-fundador de agência" },
+      { quote: "No fim de cada mês, a sócia passava duas horas a criar faturas manualmente no InvoiceXpress, verificar quais os retainers que tinham saído e reconciliar os pagamentos recebidos.", role: "Sócia de agência" },
+      { quote: "O cliente ficou em silêncio durante semanas. Descobrimos que estava retido por uma fatura de 60 dias que ninguém tinha perseguido — porque o processo de cobranças dependia da memória de alguém.", role: "Directora de Contas" },
     ],
     capabilities: [
       {
         icon: "PieChart",
-        title: "P&L por cliente sem esperar pelo contabilista",
+        title: "P&L por cliente disponível em tempo real",
         desc: "O P&L do Bernays é calculado a partir das horas registadas no Delivery e das faturas emitidas em cada período. O sócio vê a margem por cliente, por projecto e por mês — sem precisar de uma reunião de gestão nem de exportar dados para Excel.",
         bullets: [
           "Margem por cliente calculada automaticamente: receita faturada menos custo de horas registadas",
@@ -196,8 +204,19 @@ export const modulePages: ModulePageData[] = [
         image: { light: "/financeiro-cap2-light.webp", dark: "/financeiro-cap2-dark.webp", alt: "Lista de faturas do Bernays com estados Emitida, Paga e Vencida e totais por categoria" },
       },
       {
+        icon: "Globe",
+        title: "Uma experiência profissional para o teu cliente.",
+        desc: "Dá ao teu cliente um espaço dedicado para acompanhar o trabalho, aprovar entregáveis e consultar o histórico de facturas — sem precisar de conta no Bernays, sem fricção.",
+        bullets: [
+          "Acesso por link, sem registo obrigatório",
+          "Aprovação de entregáveis com registo de data e identidade",
+          "Consulta de facturas e histórico de pagamentos",
+          "Disponível no plano Agency (€15/portal/mês)",
+        ],
+      },
+      {
         icon: "CreditCard",
-        title: "Cashflow forward-looking com runway sempre visível",
+        title: "Cashflow previsto a 90 dias com runway sempre visível",
         desc: "A Tesouraria do Bernays calcula automaticamente as entradas (faturas, avençãs, recorrências) e saídas (salários, despesas, fornecedores) para os próximos 90 dias ou 12 meses. O sócio sabe o saldo previsto de cada semana — e o runway da agência — sem depender do banco.",
         bullets: [
           "Runway calculado em tempo real com faturas pendentes, avençãs e despesas recorrentes confirmadas",
@@ -214,15 +233,11 @@ export const modulePages: ModulePageData[] = [
       },
       {
         label: "Faturação e cobranças",
-        featureTitles: ["Faturação certificada AT", "Retainers automáticos", "Alertas de pagamento", "Reconciliação de pagamentos", "Notas de crédito", "Proformas"],
+        featureTitles: ["Faturação certificada AT", "Retainers automáticos", "Alertas de pagamento", "Reconciliação de pagamentos", "Notas de crédito", "Proformas", "Exportação SAF-T"],
       },
       {
         label: "Fornecedores e despesas",
         featureTitles: ["Contas a pagar", "Catálogo de serviços", "Multi-moeda", "Centros de custo"],
-      },
-      {
-        label: "Conformidade e exportação",
-        featureTitles: ["Exportação SAF-T"],
       },
     ],
     relatesTo: [
@@ -237,9 +252,9 @@ export const modulePages: ModulePageData[] = [
     headline: "Sabes se tens equipa para o próximo cliente antes de dizer que sim.",
     lead: "Aceitar um mandato novo sem saber a capacidade real da equipa é o início de muitos projectos mal entregues. O módulo de Pessoas dá ao sócio uma visão clara de quem está disponível, quem está sobrecarregado e quem tem as competências certas para o próximo cliente — sem perguntar a toda a gente por email.",
     painPoints: [
-      { quote: "Aceitámos mais um cliente em setembro porque 'tínhamos capacidade'. Em outubro, dois consultores estavam a trabalhar até às 22h e um pediu para sair. A capacidade era uma impressão, não um dado." },
-      { quote: "Precisávamos de um consultor com experiência em reputação digital para um pitch urgente. Passámos horas a perguntar por email — quando a informação estava algures num documento de RH que ninguém actualizava." },
-      { quote: "A consultora pediu férias por email em julho, foi aprovado verbalmente, mas o calendário nunca foi actualizado. A campanha ficou sem cobertura numa semana crítica." },
+      { quote: "Aceitámos mais um cliente em setembro porque 'tínhamos capacidade'. Em outubro, dois consultores estavam a trabalhar até às 22h e um pediu para sair. A capacidade era uma impressão, não um dado.", role: "Sócio de agência" },
+      { quote: "Precisávamos de um consultor com experiência em reputação digital para um pitch urgente. Passámos horas a perguntar por email — quando a informação estava algures num documento de RH que ninguém actualizava.", role: "Director de Operações" },
+      { quote: "A consultora pediu férias por email em julho, foi aprovado verbalmente, mas o calendário nunca foi actualizado. A campanha ficou sem cobertura numa semana crítica.", role: "Directora de Projecto" },
     ],
     capabilities: [
       {
@@ -266,7 +281,7 @@ export const modulePages: ModulePageData[] = [
       },
       {
         icon: "Star",
-        title: "Objectivos da equipa alinhados do topo à base",
+        title: "Cada consultor sabe como o seu trabalho contribui para o todo",
         desc: "O módulo de Performance define objectivos em cascata: da empresa ao departamento, do departamento ao individual. Cada consultor sabe o que contribui para o todo — e o sócio vê em tempo real quais os objectivos em risco antes de o trimestre terminar.",
         bullets: [
           "OKRs em três níveis (Empresa → Departamento → Individual) sem duplicação manual",
@@ -279,15 +294,11 @@ export const modulePages: ModulePageData[] = [
     featureGroups: [
       {
         label: "Capacidade e alocação",
-        featureTitles: ["Planeamento de capacidade", "Disponibilidade em tempo real", "Registo de ausências"],
-      },
-      {
-        label: "Ausências e calendário",
-        featureTitles: ["Pedidos de férias", "Marcos de equipa"],
+        featureTitles: ["Alocação da equipa", "Disponibilidade em tempo real", "Registo de ausências", "Pedidos de férias"],
       },
       {
         label: "Talento e desenvolvimento",
-        featureTitles: ["Matriz de competências", "Avaliações de performance", "Trajectória de carreira", "Catálogo de formação", "Checklists de onboarding"],
+        featureTitles: ["Matriz de competências", "Avaliações de performance", "Trajectória de carreira", "Catálogo de formação", "Checklists de onboarding", "Marcos de equipa"],
       },
       {
         label: "Recrutamento e documentação",
@@ -306,9 +317,9 @@ export const modulePages: ModulePageData[] = [
     headline: "A agência funciona quando tu não estás. Porque tudo está registado.",
     lead: "Numa agência de RP, as operações de back-office existem em pastas do Drive, emails antigos e na cabeça de uma pessoa. Quando essa pessoa sai ou está de férias, a agência perde dias a encontrar um contrato, a perceber quando renova uma subscrição ou a saber quem tem o acesso ao escritório. O módulo de Escritório regista tudo num só lugar.",
     painPoints: [
-      { quote: "A ferramenta de media monitoring renovou automaticamente por mais um ano — €4.800 que ninguém aprovou porque a data de renovação estava num email de 2022 que ninguém guardou." },
-      { quote: "A advogada pediu o contrato de prestação de serviços de um cliente. Passámos 45 minutos a procurar nas pastas do Drive antes de perceber que estava num computador que já não existia." },
-      { quote: "O novo consultor entrou na segunda-feira. Na quarta ainda não tinha acesso a todas as ferramentas porque o processo de onboarding dependia de alguém se lembrar de cada passo." },
+      { quote: "A ferramenta de media monitoring renovou automaticamente por mais um ano — €4.800 que ninguém aprovou porque a data de renovação estava num email de 2022 que ninguém guardou.", role: "Directora de Operações" },
+      { quote: "A advogada pediu o contrato de prestação de serviços de um cliente. Passámos 45 minutos a procurar nas pastas do Drive antes de perceber que estava num computador que já não existia.", role: "Sócio de agência" },
+      { quote: "O novo consultor entrou na segunda-feira. Na quarta ainda não tinha acesso a todas as ferramentas porque o processo de onboarding dependia de alguém se lembrar de cada passo.", role: "Responsável de Equipa" },
     ],
     capabilities: [
       {
@@ -324,7 +335,7 @@ export const modulePages: ModulePageData[] = [
       },
       {
         icon: "FileText",
-        title: "Salas reservadas sem email nem papel",
+        title: "Salas reservadas em tempo real, sem conflitos de agenda",
         desc: "Ver qual a sala está disponível, para quantas pessoas e reservar directamente na plataforma — sem email à recepcionista, sem conflitos de dupla reserva, sem post-it na porta. A agenda da equipa e a disponibilidade das salas estão no mesmo sítio.",
         bullets: [
           "Vista semanal de todas as salas com capacidade e disponibilidade em tempo real",
@@ -371,9 +382,9 @@ export const modulePages: ModulePageData[] = [
     headline: "O primeiro ecrã do dia que mostra o que importa — só a ti.",
     lead: "Um consultor de uma agência de RP pode ter seis projectos activos, três clientes em simultâneo e aprovações pendentes de dois gestores diferentes. O Workspace é o ponto de entrada personalizado no Bernays: as tuas tarefas de hoje, os teus prazos desta semana, as aprovações que esperam por ti — filtradas para o teu papel, não para a empresa inteira.",
     painPoints: [
-      { quote: "Cheguei de manhã com 47 notificações não lidas em cinco ferramentas diferentes. Passei 20 minutos a perceber o que era urgente antes de fazer qualquer trabalho real." },
-      { quote: "Esqueci-me de registar as horas da reunião do cliente na terça-feira. Quando fechei o mês, já não me lembrava em que projecto imputar — e as horas ficaram perdidas." },
-      { quote: "O gestor de conta perguntou-me como estava o deliverable do cliente X. Tive de ir ao email, ao Drive e ao Teams antes de conseguir responder — e a resposta ainda foi incompleta." },
+      { quote: "Cheguei de manhã com 47 notificações não lidas em cinco ferramentas diferentes. Passei 20 minutos a perceber o que era urgente antes de fazer qualquer trabalho real.", role: "Consultora de RP" },
+      { quote: "Esqueci-me de registar as horas da reunião do cliente na terça-feira. Quando fechei o mês, já não me lembrava em que projecto imputar — e as horas ficaram perdidas.", role: "Consultor Júnior" },
+      { quote: "O gestor de conta perguntou-me como estava o deliverable do cliente X. Tive de ir ao email, ao Drive e ao Teams antes de conseguir responder — e a resposta ainda foi incompleta.", role: "Gestor de Conta" },
     ],
     capabilities: [
       {
@@ -416,12 +427,12 @@ export const modulePages: ModulePageData[] = [
         featureTitles: ["Dashboard pessoal", "Inbox centralizado", "As tuas tarefas", "Fila de aprovações", "Notificações inteligentes"],
       },
       {
-        label: "Registo de tempo",
-        featureTitles: ["Registo de horas diário", "Calendário semanal"],
+        label: "Tempo e produtividade",
+        featureTitles: ["Registo de horas diário", "Calendário semanal", "Resumo da semana"],
       },
       {
         label: "Navegação e acesso",
-        featureTitles: ["Pesquisa global", "Favoritos e fixados", "Histórico de actividade", "Atalhos de teclado", "Modos de visualização", "Resumo da semana"],
+        featureTitles: ["Pesquisa global", "Favoritos e fixados", "Histórico de actividade", "Atalhos de teclado", "Modos de visualização"],
       },
     ],
     relatesTo: [
@@ -436,9 +447,9 @@ export const modulePages: ModulePageData[] = [
     headline: "Construído para Portugal, do código à língua, da segurança ao contabilista.",
     lead: "A maior parte dos ERPs que as agências portuguesas usam foi construída para mercados anglófonos e localizada para PT-PT a custo. O Bernays foi construído de origem para o contexto português — faturação AT certificada, RGPD compliant de série, português europeu em todos os textos gerados. Não são configurações opcionais. São o comportamento por defeito da plataforma.",
     painPoints: [
-      { quote: "A plataforma que usávamos antes era em inglês, mas os contratos e propostas tinham de ser em português. Resultado: metade das comunicações com clientes saía num híbrido que não era inglês nem português correcto." },
-      { quote: "Tivemos uma auditoria do contabilista. Pediu o SAF-T do último ano. Passámos três dias a exportar, converter e formatar dados de três ferramentas diferentes para ter um ficheiro que ele conseguia usar." },
-      { quote: "Acordámos com o sistema de gestão fora do ar uma segunda-feira de manhã. Suporte por ticket. Resposta em 72 horas. A equipa passou o dia em Excel e WhatsApp." },
+      { quote: "A plataforma que usávamos antes era em inglês, mas os contratos e propostas tinham de ser em português. Resultado: metade das comunicações com clientes saía num híbrido que não era inglês nem português correcto.", role: "Directora de Operações" },
+      { quote: "Tivemos uma auditoria do contabilista. Pediu o SAF-T do último ano. Passámos três dias a exportar, converter e formatar dados de três ferramentas diferentes para ter um ficheiro que ele conseguia usar.", role: "Gestora Financeira" },
+      { quote: "Acordámos com o sistema de gestão fora do ar uma segunda-feira de manhã. Suporte por ticket. Resposta em 72 horas. A equipa passou o dia em Excel e WhatsApp.", role: "Sócio-fundador de agência" },
     ],
     capabilities: [
       {
@@ -450,11 +461,11 @@ export const modulePages: ModulePageData[] = [
           "Menus, notificações e mensagens de erro em português europeu — sem uma palavra de inglês",
         ],
         imageSlotDesc: "Proposta ou fatura gerada pelo Bernays: documento em PT-PT com tipografia profissional, morada portuguesa, NIF, ATCUD visível. Qualidade documental.",
-        image: { light: "/plataforma-cap1-light.webp", dark: "/plataforma-cap1-light.webp", alt: "Factura gerada pelo Bernays em português europeu com NIF, IVA 23% e totais correctos" },
+        image: { light: "/plataforma-cap1-light.webp", dark: "/plataforma-cap1-dark.webp", alt: "Factura gerada pelo Bernays em português europeu com NIF, IVA 23% e totais correctos" },
       },
       {
         icon: "Shield",
-        title: "Segurança que não exige configuração",
+        title: "Seguro por defeito, não por upgrade",
         desc: "2FA disponível em todos os planos sem custo adicional. Dados de cada agência isolados por Row-Level Security na base de dados. Backups automáticos diários com retenção de 30 dias. Seguro por defeito, não por upgrade.",
         bullets: [
           "2FA activável por qualquer utilizador sem necessidade de plano premium",
@@ -465,7 +476,7 @@ export const modulePages: ModulePageData[] = [
       },
       {
         icon: "Zap",
-        title: "Tudo configurado numa página. Organizado por módulo.",
+        title: "Cada responsável acede às definições do seu módulo — e só a isso",
         desc: "As definições da agência no Bernays estão organizadas por área — Workspace, Crescimento, Delivery, Financeiro, Pessoas e Conta. Cada responsável acede exactamente às configurações do seu domínio, sem navegar por um painel de admin genérico.",
         bullets: [
           "Identidade da agência, NIF, morada e cor primária num único sítio",

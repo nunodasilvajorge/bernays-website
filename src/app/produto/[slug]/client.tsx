@@ -15,6 +15,7 @@ import {
 import { Nav } from "@/components/nav"
 import { Footer } from "@/components/footer"
 import { FloatingCta } from "@/components/floating-cta"
+import { ScrollProgress } from "@/components/scroll-progress"
 import { FadeIn } from "@/lib/animate"
 import { modules } from "@/lib/features-data"
 import { modulePages, type Capability } from "@/lib/module-pages-data"
@@ -52,7 +53,7 @@ function FeatureCard({ title, desc, color, index, inView }: {
         <p className="text-[13px] font-semibold leading-snug mb-1" style={{ color: "var(--page-text)" }}>
           {title}
         </p>
-        <p className="text-[12px] leading-relaxed" style={{ color: "var(--page-text-faint)" }}>
+        <p className="text-[13px] leading-relaxed" style={{ color: "var(--page-text-muted)" }}>
           {desc}
         </p>
       </div>
@@ -72,7 +73,7 @@ function FeatureGrid({ features, color }: { features: { title: string; desc: str
   )
 }
 
-function PainCard({ quote, color }: { quote: string; color: string }) {
+function PainCard({ quote, role, color }: { quote: string; role?: string; color: string }) {
   return (
     <div
       className="p-5 rounded-xl"
@@ -82,9 +83,14 @@ function PainCard({ quote, color }: { quote: string; color: string }) {
         paddingLeft: "1.25rem",
       }}
     >
-      <p className="text-[14px] italic leading-relaxed" style={{ color: "var(--page-text-muted)" }}>
+      <p className="text-[14px] italic leading-relaxed mb-3" style={{ color: "var(--page-text-muted)" }}>
         "{quote}"
       </p>
+      {role && (
+        <p className="text-[11px] font-semibold tracking-wide uppercase not-italic" style={{ color: `${color}90` }}>
+          — {role}
+        </p>
+      )}
     </div>
   )
 }
@@ -142,7 +148,7 @@ function ImageLightbox({
         />
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-white transition-colors duration-150 hover:bg-white/20"
+          className="absolute top-3 right-3 w-11 h-11 rounded-full flex items-center justify-center text-white transition-colors duration-150 hover:bg-white/20"
           style={{ background: "rgba(0,0,0,0.55)" }}
           aria-label="Fechar"
         >
@@ -183,7 +189,7 @@ function CapabilityPanel({
         <div className="flex items-center gap-3 mb-5">
           <span
             className="text-[11px] font-bold tracking-[0.15em] tabular-nums"
-            style={{ color: `${color}70` }}
+            style={{ color: `${color}90` }}
           >
             0{index + 1}
           </span>
@@ -229,6 +235,23 @@ function CapabilityPanel({
               onClick={() => setLightboxOpen(true)}
               aria-label={`Ver imagem completa: ${cap.image.alt}`}
             >
+              {/* Browser chrome */}
+              <div
+                className="flex items-center gap-2.5 px-3 py-2 border-b"
+                style={{ background: "var(--page-surface)", borderColor: "var(--page-border)" }}
+              >
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-[#ff5f57]" />
+                  <div className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
+                  <div className="w-2 h-2 rounded-full bg-[#28c840]" />
+                </div>
+                <div
+                  className="flex-1 max-w-[160px] mx-auto rounded px-2 py-0.5 text-[10px] text-center"
+                  style={{ background: "var(--page-card)", color: "var(--page-text-faint)" }}
+                >
+                  app.bernays.pt
+                </div>
+              </div>
               <Image
                 src={cap.image.light}
                 alt={cap.image.alt}
@@ -298,6 +321,7 @@ export function ModulePageContent({ slug }: { slug: string }) {
 
   return (
     <main style={{ background: "var(--page-bg)" }}>
+      <ScrollProgress />
       <Nav />
       <FloatingCta />
 
@@ -322,7 +346,7 @@ export function ModulePageContent({ slug }: { slug: string }) {
         >
           <div
             className="absolute inset-0 pointer-events-none"
-            style={{ background: `radial-gradient(ellipse 70% 100% at 50% 100%, ${mod.color}14 0%, transparent 70%)` }}
+            style={{ background: `radial-gradient(ellipse 70% 100% at 50% 100%, ${mod.color}38 0%, transparent 70%)` }}
           />
           <div className="relative z-10 max-w-3xl">
             <motion.p
@@ -338,7 +362,7 @@ export function ModulePageContent({ slug }: { slug: string }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.06, ease }}
-              className="text-[clamp(28px,4.5vw,50px)] font-extrabold tracking-[-0.04em] leading-[1.08] mb-5"
+              className="text-[clamp(32px,5vw,60px)] font-extrabold tracking-[-0.04em] leading-[1.08] mb-5"
               style={{ color: "var(--page-text)", fontFamily: "var(--font-display)" }}
             >
               {data.headline}
@@ -379,14 +403,14 @@ export function ModulePageContent({ slug }: { slug: string }) {
         {/* Pain section */}
         <FadeIn className="mb-14">
           <p
-            className="text-[11px] font-bold tracking-widest uppercase mb-5"
-            style={{ color: "var(--page-text-faint)" }}
+            className="text-[13px] font-semibold tracking-wide uppercase mb-5"
+            style={{ color: "var(--page-text-muted)" }}
           >
             O problema que o {mod.label} resolve
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {data.painPoints.map((p, i) => (
-              <PainCard key={i} quote={p.quote} color={mod.color} />
+              <PainCard key={i} quote={p.quote} role={p.role} color={mod.color} />
             ))}
           </div>
         </FadeIn>
@@ -435,6 +459,9 @@ export function ModulePageContent({ slug }: { slug: string }) {
                 priority
               />
             </div>
+            <p className="text-[12px] text-center mt-3" style={{ color: "var(--page-text-faint)" }}>
+              {data.screenshot.alt}
+            </p>
           </FadeIn>
         )}
 
@@ -442,8 +469,8 @@ export function ModulePageContent({ slug }: { slug: string }) {
         <div className="mb-20">
           <FadeIn>
             <p
-              className="text-[11px] font-bold tracking-widest uppercase mb-12"
-              style={{ color: "var(--page-text-faint)" }}
+              className="text-[13px] font-semibold tracking-wide uppercase mb-12"
+              style={{ color: "var(--page-text-muted)" }}
             >
               O que muda com o {mod.label}
             </p>
@@ -459,8 +486,8 @@ export function ModulePageContent({ slug }: { slug: string }) {
         <div className="mb-16">
           <FadeIn>
             <p
-              className="text-[11px] font-bold tracking-widest uppercase mb-10"
-              style={{ color: "var(--page-text-faint)" }}
+              className="text-[13px] font-semibold tracking-wide uppercase mb-10"
+              style={{ color: "var(--page-text-muted)" }}
             >
               Tudo o que inclui
             </p>
@@ -503,12 +530,12 @@ export function ModulePageContent({ slug }: { slug: string }) {
           <div className="mb-16">
             <FadeIn>
               <p
-                className="text-[11px] font-bold tracking-widest uppercase mb-6"
-                style={{ color: "var(--page-text-faint)" }}
+                className="text-[13px] font-semibold tracking-wide uppercase mb-6"
+                style={{ color: "var(--page-text-muted)" }}
               >
                 Integra com
               </p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className={`grid gap-3 ${data.relatesTo.length >= 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2"}`}>
                 {data.relatesTo.map(({ id, integrationNote }) => {
                   const relMod = modules.find((m) => m.id === id)
                   if (!relMod) return null
@@ -516,7 +543,7 @@ export function ModulePageContent({ slug }: { slug: string }) {
                     <Link
                       key={id}
                       href={`/produto/${id}`}
-                      className="block p-4 rounded-xl border transition-all duration-150 hover:opacity-80"
+                      className="block p-4 rounded-xl border transition-colors duration-150 hover:brightness-[0.96]"
                       style={{
                         background: `${relMod.color}06`,
                         borderColor: `${relMod.color}20`,
@@ -551,14 +578,17 @@ export function ModulePageContent({ slug }: { slug: string }) {
         {/* CTA strip */}
         <FadeIn>
           <div
-            className="rounded-2xl border p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-            style={{ background: "var(--page-card)", borderColor: "var(--page-border)" }}
+            className="rounded-2xl border p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+            style={{
+              background: `linear-gradient(135deg, ${mod.color}10 0%, ${mod.color}06 100%)`,
+              borderColor: `${mod.color}25`,
+            }}
           >
             <div>
-              <p className="text-[16px] font-bold mb-1" style={{ color: "var(--page-text)" }}>
+              <p className="text-[17px] font-bold mb-1" style={{ color: "var(--page-text)" }}>
                 Vê tudo isto a funcionar — em 5 minutos.
               </p>
-              <p className="text-[13px]" style={{ color: "var(--page-text-faint)" }}>
+              <p className="text-[13px]" style={{ color: "var(--page-text-muted)" }}>
                 Demo interactiva com dados reais de uma agência. Sem registo.
               </p>
             </div>
@@ -566,7 +596,7 @@ export function ModulePageContent({ slug }: { slug: string }) {
               href={DEMO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-semibold px-5 py-2.5 rounded-xl text-[14px] transition-colors duration-150 shrink-0"
+              className="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-semibold px-6 py-3 rounded-xl text-[15px] transition-colors duration-150 shrink-0"
             >
               Ver demo
               <ArrowRight size={14} />

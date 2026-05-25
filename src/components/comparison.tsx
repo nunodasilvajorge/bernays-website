@@ -88,7 +88,7 @@ export function Comparison() {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.35, delay: i * 0.05, ease }}
-              className="grid grid-cols-[1fr_1fr] md:grid-cols-[120px_1fr_1fr]"
+              className="grid grid-cols-[1fr_1fr] md:grid-cols-[120px_1fr_1fr] group/row transition-colors duration-150 hover:bg-black/[0.015] dark:hover:bg-white/[0.015]"
               style={i < rows.length - 1 ? { borderBottom: "1px solid var(--page-border)" } : {}}
             >
               {/* Label */}

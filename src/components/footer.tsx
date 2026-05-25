@@ -8,30 +8,33 @@ const nav = [
   {
     heading: "Produto",
     links: [
-      { label: "Funcionalidades", href: "/funcionalidades" },
-      { label: "Crescimento", href: "/produto/crescimento" },
-      { label: "Delivery", href: "/produto/delivery" },
-      { label: "Financeiro", href: "/produto/financeiro" },
-      { label: "Pessoas", href: "/produto/pessoas" },
-      { label: "Ver demo", href: DEMO_URL },
+      { label: "Funcionalidades",    href: "/funcionalidades" },
+      { label: "Crescimento",        href: "/produto/crescimento" },
+      { label: "Delivery",           href: "/produto/delivery" },
+      { label: "Financeiro",         href: "/produto/financeiro" },
+      { label: "Pessoas",            href: "/produto/pessoas" },
+      { label: "Escritório",         href: "/produto/escritorio" },
+      { label: "Workspace",          href: "/produto/workspace" },
+      { label: "Plataforma",         href: "/produto/plataforma" },
+      { label: "Ver demo",           href: DEMO_URL, cta: true },
     ],
   },
   {
-    heading: "Entrar",
+    heading: "Acesso",
     links: [
-      { label: "Aceder à aplicação", href: `${APP_URL}/login` },
-      { label: "Marcar demo", href: "/agenda" },
-      { label: "Demo guiada", href: DEMO_URL },
+      { label: "Aceder à aplicação", href: `${APP_URL}/login`, cta: true },
+      { label: "Marcar demo",        href: "/agenda", cta: true },
+      { label: "Demo guiada",        href: DEMO_URL, cta: true },
     ],
   },
   {
     heading: "Sobre",
     links: [
-      { label: "Quem somos", href: "/sobre" },
-      { label: "Novidades", href: "/changelog" },
-      { label: "Academia", href: "/funcionalidades#academia" },
-      { label: "Privacidade", href: "/privacidade" },
-      { label: "Termos", href: "/termos" },
+      { label: "Quem somos",         href: "/sobre" },
+      { label: "Novidades",          href: "/changelog" },
+      { label: "Academia",           href: "/funcionalidades#academia" },
+      { label: "Privacidade",        href: "/privacidade" },
+      { label: "Termos",             href: "/termos" },
     ],
   },
 ]
@@ -66,7 +69,8 @@ export function Footer() {
               href="https://www.linkedin.com/in/nunodasilvajorge/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[13px] font-medium transition-colors duration-150 hover:text-brand text-[var(--page-text-faint)]"
+              className="inline-flex items-center gap-2 text-[13px] font-medium transition-colors duration-150 hover:text-brand"
+              style={{ color: "var(--page-text-faint)" }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -85,27 +89,26 @@ export function Footer() {
                 {col.heading}
               </p>
               <ul className="space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    {link.href.startsWith("http") ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[14px] transition-colors duration-150 text-[var(--page-text-muted)] hover:text-[var(--page-text)]"
-                      >
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link
-                        href={link.href}
-                        className="text-[14px] transition-colors duration-150 text-[var(--page-text-muted)] hover:text-[var(--page-text)]"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
+                {col.links.map((link) => {
+                  const cls = `text-[14px] transition-colors duration-150 ${
+                    (link as { cta?: boolean }).cta
+                      ? "text-[var(--page-text-muted)] hover:text-brand"
+                      : "text-[var(--page-text-muted)] hover:text-[var(--page-text)]"
+                  }`
+                  return (
+                    <li key={link.label}>
+                      {link.href.startsWith("http") ? (
+                        <a href={link.href} target="_blank" rel="noopener noreferrer" className={cls}>
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link href={link.href} className={cls}>
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           ))}

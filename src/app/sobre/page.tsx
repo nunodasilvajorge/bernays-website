@@ -7,6 +7,7 @@ import { Nav } from "@/components/nav"
 import { Footer } from "@/components/footer"
 import { FloatingCta } from "@/components/floating-cta"
 import { FadeIn } from "@/lib/animate"
+import { Academia } from "@/components/academia"
 
 const DEMO_URL = process.env.NEXT_PUBLIC_DEMO_URL ?? "https://demo.bernays.pt"
 const ease = [0.22, 1, 0.36, 1] as const
@@ -17,9 +18,9 @@ export default function SobrePage() {
       <Nav />
       <FloatingCta />
 
-      <div className="max-w-5xl mx-auto px-6 pt-32 pb-24">
+      <div className="max-w-5xl mx-auto px-6 pt-32">
 
-        {/* Header */}
+        {/* Hero */}
         <div
           className="relative mb-16 pb-10 border-b overflow-hidden"
           style={{ borderColor: "var(--page-border)" }}
@@ -35,7 +36,7 @@ export default function SobrePage() {
               transition={{ duration: 0.4, ease }}
               className="text-sm font-semibold text-brand tracking-widest uppercase mb-3"
             >
-              O fundador
+              Porquê o Bernays
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
@@ -55,10 +56,35 @@ export default function SobrePage() {
           </div>
         </div>
 
-        {/* Body */}
-        <div className="max-w-3xl mx-auto space-y-16">
+        {/* Content — before Academia */}
+        <div className="max-w-3xl mx-auto space-y-16 pb-20">
 
-          {/* Profile */}
+          {/* 1. O problema */}
+          <FadeIn>
+            <div>
+              <p className="text-sm font-semibold text-brand tracking-widest uppercase mb-5">
+                O problema
+              </p>
+              <h2
+                className="text-[clamp(22px,3vw,32px)] font-extrabold tracking-[-0.03em] leading-snug mb-6"
+                style={{ color: "var(--page-text)", fontFamily: "var(--font-display)" }}
+              >
+                O que as universidades ensinam sobre gestão de RP não está em nenhum software.
+              </h2>
+              <p className="text-[15px] leading-relaxed mb-4" style={{ color: "var(--page-text-muted)" }}>
+                Na academia, o conhecimento sobre como gerir uma agência de Relações Públicas — rentabilidade por cliente, propostas, timesheets, relatórios de actividade — existe e está documentado. Mas quando uma agência abre portas, recorre ao Excel, ao Toggl ou ao Productive: ferramentas construídas para outros sectores, adaptadas à força para PR.
+              </p>
+              <p className="text-[15px] leading-relaxed" style={{ color: "var(--page-text-muted)" }}>
+                O resultado é previsível:{" "}
+                <span className="font-semibold" style={{ color: "var(--page-text)" }}>
+                  agências que nunca sabem exactamente se estão a ganhar ou a perder dinheiro, porque os dados estão dispersos por cinco ferramentas que nunca falam entre si.
+                </span>{" "}
+                O Bernays existe para resolver exactamente isto.
+              </p>
+            </div>
+          </FadeIn>
+
+          {/* 2. Profile */}
           <FadeIn>
             <div className="grid md:grid-cols-[auto_1fr] gap-8 items-start">
               <Image
@@ -79,10 +105,10 @@ export default function SobrePage() {
                   Professor de Relações Públicas · ESCS-IPL · Fundador do Bernays
                 </p>
                 <p className="text-[15px] leading-relaxed mb-3" style={{ color: "var(--page-text-muted)" }}>
-                  Estratega de Relações Públicas com carreira entre a consultoria e o ensino superior. Passou anos a trabalhar com agências e a ensinar gestão da comunicação — e percebeu que as ferramentas disponíveis no mercado não foram construídas para este sector.
+                  Nuno passou anos a ensinar gestão de agências de RP na ESCS-IPL e a trabalhar com consultoras — e viu o mesmo padrão repetir-se: operações complexas geridas com ferramentas de outros sectores adaptadas à força. O Bernays nasceu dessa contradição.
                 </p>
                 <p className="text-[15px] leading-relaxed mb-6" style={{ color: "var(--page-text-muted)" }}>
-                  Fundou o Bernays para resolver o problema que via todos os dias: agências de RP a gerir operações complexas com folhas de cálculo e ferramentas construídas para outros sectores.
+                  É também o ponto de partida de uma linha de investigação sobre modelos de criação de valor em comunicação estratégica — que informa directamente a arquitectura do produto.
                 </p>
                 <a
                   href="https://www.linkedin.com/in/nunodasilvajorge/"
@@ -100,11 +126,11 @@ export default function SobrePage() {
             </div>
           </FadeIn>
 
-          {/* Academic credential */}
+          {/* 3. Academic credentials — reframed */}
           <FadeIn delay={0.05}>
             <div>
               <p className="text-sm font-semibold text-brand tracking-widest uppercase mb-5">
-                Investigação académica
+                A investigação por trás do produto
               </p>
               <div
                 className="rounded-2xl border p-6"
@@ -147,32 +173,17 @@ export default function SobrePage() {
             </div>
           </FadeIn>
 
-          {/* O gap */}
-          <FadeIn delay={0.05}>
-            <div>
-              <p className="text-sm font-semibold text-brand tracking-widest uppercase mb-5">
-                O gap
-              </p>
-              <h2
-                className="text-[clamp(22px,3vw,32px)] font-extrabold tracking-[-0.03em] leading-snug mb-6"
-                style={{ color: "var(--page-text)", fontFamily: "var(--font-display)" }}
-              >
-                O que as universidades ensinam sobre gestão de RP não está em nenhum software.
-              </h2>
-              <p className="text-[15px] leading-relaxed mb-4" style={{ color: "var(--page-text-muted)" }}>
-                Na academia, o conhecimento sobre como gerir uma agência de Relações Públicas — rentabilidade por cliente, propostas, timesheets, relatórios de actividade — existe e está documentado. Mas quando uma agência abre portas, recorre ao Excel, ao Toggl ou ao Productive: ferramentas construídas para outros sectores, adaptadas à força para PR.
-              </p>
-              <p className="text-[15px] leading-relaxed" style={{ color: "var(--page-text-muted)" }}>
-                O resultado é previsível:{" "}
-                <span className="font-semibold" style={{ color: "var(--page-text)" }}>
-                  agências que nunca sabem exactamente se estão a ganhar ou a perder dinheiro, porque os dados estão dispersos por cinco ferramentas que nunca falam entre si.
-                </span>{" "}
-                O Bernays existe para resolver exactamente isto.
-              </p>
-            </div>
-          </FadeIn>
+        </div>
+      </div>
 
-          {/* Blockquote */}
+      {/* 4. Academia — full-width bleed */}
+      <Academia />
+
+      {/* Content — after Academia */}
+      <div className="max-w-5xl mx-auto px-6 pb-24">
+        <div className="max-w-3xl mx-auto space-y-16 pt-16">
+
+          {/* 5. Blockquote */}
           <FadeIn delay={0.05}>
             <div
               className="relative px-8 py-12 rounded-2xl overflow-hidden border"
@@ -199,7 +210,7 @@ export default function SobrePage() {
                     className="text-[clamp(17px,2.3vw,22px)] font-medium leading-relaxed mb-8"
                     style={{ color: "var(--page-text)", fontFamily: "var(--font-display)" }}
                   >
-                    A minha visão é que o sector de Relações Públicas se afirme como um modelo de criação de valor para os clientes. Agências mais rentáveis e melhor organizadas têm mais tempo para o que realmente importa: comunicação estratégica de qualidade.
+                    Há décadas de investigação sobre como uma agência de RP deve ser gerida — modelos de rentabilidade, estruturas de entrega, desenvolvimento de equipas. Nenhum software incorporou esse conhecimento de forma séria. O Bernays é a tentativa de mudar isso.
                   </p>
                   <footer className="flex items-center gap-3">
                     <Image
@@ -223,7 +234,7 @@ export default function SobrePage() {
             </div>
           </FadeIn>
 
-          {/* CTA */}
+          {/* 6. CTA */}
           <FadeIn delay={0.05}>
             <div className="border-t pt-8" style={{ borderColor: "var(--page-border)" }}>
               <div className="flex flex-col sm:flex-row gap-3 mb-4">

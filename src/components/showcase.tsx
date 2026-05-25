@@ -91,14 +91,14 @@ function Screenshot({ light, dark, alt, fromLeft }: { light: string; dark: strin
       initial={{ opacity: 0, x: fromLeft ? -48 : 48, scale: 0.97 }}
       animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
       transition={{ duration: 0.75, ease }}
-      className="rounded-2xl overflow-hidden border"
+      className="rounded-2xl overflow-hidden border group"
       style={{
         borderColor: "rgba(0,0,0,0.1)",
         boxShadow: "0 2px 0 rgba(0,0,0,0.06), 0 24px 64px rgba(0,0,0,0.14), 0 8px 24px rgba(0,0,0,0.08)"
       }}
     >
-      <Image src={light} alt={alt} width={1440} height={900} loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="w-full block dark:hidden" />
-      <Image src={dark} alt={alt} width={1440} height={900} loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="w-full hidden dark:block" />
+      <Image src={light} alt={alt} width={1440} height={900} loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="w-full block dark:hidden transition-transform duration-500 ease-out group-hover:scale-[1.02]" />
+      <Image src={dark} alt={alt} width={1440} height={900} loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="w-full hidden dark:block transition-transform duration-500 ease-out group-hover:scale-[1.02]" />
     </motion.div>
   )
 }
