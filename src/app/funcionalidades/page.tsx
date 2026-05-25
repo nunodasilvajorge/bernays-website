@@ -13,8 +13,8 @@ import { Academia } from "@/components/academia"
 const DEMO_URL = process.env.NEXT_PUBLIC_DEMO_URL ?? "https://demo.bernays.pt"
 const ease = [0.22, 1, 0.36, 1] as const
 
-function FeatureCard({ title, desc, color, index, inView }: {
-  title: string; desc: string; color: string; index: number; inView: boolean
+function FeatureCard({ title, desc, color, index, inView, ai }: {
+  title: string; desc: string; color: string; index: number; inView: boolean; ai?: boolean
 }) {
   return (
     <motion.div
@@ -30,13 +30,23 @@ function FeatureCard({ title, desc, color, index, inView }: {
       >
         <div className="w-2 h-2 rounded-full" style={{ background: color }} />
       </div>
-      <div>
-        <p
-          className="text-[13px] font-semibold leading-snug mb-1"
-          style={{ color: "var(--page-text)" }}
-        >
-          {title}
-        </p>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+          <p
+            className="text-[13px] font-semibold leading-snug"
+            style={{ color: "var(--page-text)" }}
+          >
+            {title}
+          </p>
+          {ai && (
+            <span
+              className="text-[9px] font-bold tracking-wider px-1.5 py-0.5 rounded-full shrink-0"
+              style={{ background: `${color}15`, color }}
+            >
+              IA
+            </span>
+          )}
+        </div>
         <p
           className="text-[12px] leading-relaxed"
           style={{ color: "var(--page-text-muted)" }}
@@ -117,6 +127,7 @@ function ModuleSection({ mod, index }: { mod: Module; index: number }) {
             color={mod.color}
             index={i}
             inView={isInView}
+            ai={f.ai}
           />
         ))}
       </div>

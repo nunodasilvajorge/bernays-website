@@ -115,40 +115,40 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.26, ease }}
-          className="flex flex-col items-center gap-3 mb-5"
+          className="flex flex-col items-center gap-5 mb-5"
         >
-          {/* Primary CTA */}
-          <motion.a
-            href={DEMO_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ duration: 0.15 }}
-            className="relative overflow-hidden flex items-center gap-2 bg-brand text-white font-semibold px-7 py-3.5 rounded-xl text-[15px]"
-            style={{ boxShadow: "0 0 0 1px oklch(0.581 0.243 263 / 0.5), 0 0 32px oklch(0.581 0.243 263 / 0.25)" }}
-          >
-            {/* Shimmer sweep */}
-            <motion.span
-              aria-hidden="true"
-              className="absolute inset-0 pointer-events-none -skew-x-[20deg]"
-              style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)", width: "50%" }}
-              animate={{ x: ["-120%", "280%"] }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: "linear", repeatDelay: 1.8 }}
-            />
-            <span className="relative">Ver demo</span>
-            <svg className="relative" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </motion.a>
+          {/* Primary CTA + friction text glued together */}
+          <div className="flex flex-col items-center gap-2">
+            <motion.a
+              href={DEMO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.15 }}
+              className="relative overflow-hidden flex items-center gap-2 bg-brand text-white font-semibold px-7 py-3.5 rounded-xl text-[15px]"
+              style={{ boxShadow: "0 0 0 1px oklch(0.581 0.243 263 / 0.5), 0 0 32px oklch(0.581 0.243 263 / 0.25)" }}
+            >
+              {/* Shimmer sweep */}
+              <motion.span
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none -skew-x-[20deg]"
+                style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)", width: "50%" }}
+                animate={{ x: ["-120%", "280%"] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: "linear", repeatDelay: 1.8 }}
+              />
+              <span className="relative">Ver demo</span>
+              <svg className="relative" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </motion.a>
 
-          <p className="text-[12px] text-slate-400 dark:text-white/20 flex items-center justify-center gap-2 flex-wrap">
-            <span>Sem registo</span>
-            <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/15 inline-block" />
-            <span>Sem cartão de crédito</span>
-            <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/15 inline-block" />
-            <span>Demo com dados reais de agência</span>
-          </p>
+            <p className="text-[12px] text-slate-400 dark:text-white/35 flex items-center justify-center gap-2 flex-wrap">
+              <span>Sem registo</span>
+              <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/20 inline-block" />
+              <span>Sem cartão de crédito</span>
+            </p>
+          </div>
 
           {/* Secondary — calendar link */}
           <motion.p

@@ -11,6 +11,7 @@ import {
 export interface Feature {
   title: string
   desc: string
+  ai?: boolean
 }
 
 export interface Module {
@@ -51,6 +52,8 @@ export const modules: Module[] = [
       { title: "Reuniões integradas", desc: "Reuniões associadas a deals ou clientes com acta, decisões e follow-ups registados — contexto sempre disponível." },
       { title: "Importação de contactos", desc: "Migra a lista de contactos existente sem perder um campo. Começa com o histórico que já tens." },
       { title: "Propostas colaborativas com e-signature", desc: "Cria e edita propostas em equipa em tempo real. Envia por link, recebe assinatura digital — sem Word, sem email." },
+      { title: "Gerador de brief estratégico", desc: "Transforma notas brutas num brief completo com objectivos SMART, message house e calendário editorial — pronto a apresentar ao cliente em segundos.", ai: true },
+      { title: "Rascunho de email por IA", desc: "Escreves o contexto, o Bernays rascunha o email. Cold pitch, follow-up, envio de proposta ou reactivação — em qualquer estilo e tom.", ai: true },
     ],
   },
   {
@@ -78,6 +81,8 @@ export const modules: Module[] = [
       { title: "Gestão de documentos", desc: "Ficheiros, versões e assets de cada projecto centralizados — sem links quebrados no email nem pastas impossíveis de encontrar." },
       { title: "Briefings e deliverables", desc: "Documento de briefing associado ao projecto desde o primeiro dia — contexto sempre disponível para toda a equipa." },
       { title: "Portal do cliente", desc: "Partilha de documentos e aprovações com o cliente em ambiente controlado — sem expor dados internos da agência." },
+      { title: "Relatório de actividade por IA", desc: "Introduz os dados do projecto, o Bernays gera o relatório pronto a enviar ao cliente — resultados, análise de cobertura e próximos passos incluídos.", ai: true },
+      { title: "Ata de reunião automática", desc: "Introduz as notas brutas, o Bernays estrutura a ata com decisões, próximas acções e responsáveis — identificados automaticamente.", ai: true },
     ],
   },
   {
@@ -106,6 +111,7 @@ export const modules: Module[] = [
       { title: "Proformas", desc: "Documento de pré-faturação enviado antes da prestação — útil para clientes que exigem aprovação interna antes de pagar." },
       { title: "Centros de custo", desc: "Agrupamento de despesas por departamento ou área — controlo granular para agências com estrutura de negócio diversificada." },
       { title: "Portal de cliente", desc: "O teu cliente acompanha o projecto, aprova entregáveis e consulta facturas — sem precisar de conta no Bernays." },
+      { title: "OCR de recibos por câmara", desc: "Fotografa o recibo com o telemóvel. O Bernays extrai fornecedor, valor, IVA e categoria — e submete a despesa pré-preenchida em segundos.", ai: true },
     ],
   },
   {
@@ -178,6 +184,7 @@ export const modules: Module[] = [
       { title: "Atalhos de teclado", desc: "Regista horas, cria tarefas, abre um cliente sem tocar no rato — para quem trabalha depressa." },
       { title: "Modos de visualização", desc: "Lista, kanban ou calendário — o teu trabalho no formato que preferes, sem obrigar toda a equipa ao mesmo." },
       { title: "Resumo da semana", desc: "Fotografia do teu progresso e do que falta entregar — útil para o check-in de sexta-feira sem precisar de relatório." },
+      { title: "Assistente de IA contextual", desc: "O assistente do Bernays sabe em que página estás, que projectos tens activos e o que está em atraso. Uma pergunta, uma resposta — sem procurar nada.", ai: true },
     ],
   },
   {

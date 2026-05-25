@@ -274,6 +274,7 @@ const features = [
   {
     id: "crescimento",
     label: "CRESCIMENTO",
+    ai: true,
     title: "Sabe onde está cada oportunidade de negócio.",
     body: "Pipeline honesto, propostas com aceitação digital e histórico completo de cada cliente. Do primeiro contacto ao contrato — sem depender da memória de ninguém.",
     icon: <TrendingUp {...lucideProps} />,
@@ -285,6 +286,7 @@ const features = [
   {
     id: "delivery",
     label: "DELIVERY",
+    ai: true,
     title: "Sabes o que cada consultor está a fazer.",
     body: "Prazos, orçamentos e estado de cada projecto em tempo real. Quando algo está a desviar, sabes antes do cliente perceber.",
     icon: <CheckSquare {...lucideProps} />,
@@ -296,6 +298,7 @@ const features = [
   {
     id: "financeiro",
     label: "FINANCEIRO",
+    ai: true,
     title: "Fatura. Recebe. Controla.",
     body: "Retainers configurados uma vez, emitidos sempre. P&L por cliente, cobranças visíveis, cashflow actualizado. Sem surpresas no final do mês. Despesas: fotografa o recibo com o telemóvel e está feito — o Bernays lê, categoriza e submete em segundos.",
     icon: <Receipt {...lucideProps} />,
@@ -329,6 +332,7 @@ const features = [
   {
     id: "workspace",
     label: "WORKSPACE",
+    ai: true,
     title: "Começa cada dia a saber o que importa.",
     body: "O teu painel pessoal no computador e no telemóvel. Tarefas, alertas e horas num só sítio — em qualquer dispositivo, em qualquer lugar. Usa o Bernays como app instalada no iPhone ou Android.",
     icon: <LayoutDashboard {...lucideProps} />,
@@ -379,7 +383,12 @@ function FeatureCard({ f, delay }: { f: (typeof features)[number]; delay: number
           <>
             <div className="md:w-80 shrink-0 relative z-[1]">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[11px] font-bold tracking-widest" style={{ color: f.color }}>{f.label}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold tracking-widest" style={{ color: f.color }}>{f.label}</span>
+                  {"ai" in f && f.ai && (
+                    <span className="text-[9px] font-bold tracking-wider px-1.5 py-0.5 rounded-full" style={{ background: `${f.color}15`, color: f.color }}>IA</span>
+                  )}
+                </div>
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${f.color}18`, color: f.color }}>{f.icon}</div>
               </div>
               <h3 className="text-[16px] font-bold text-slate-800 dark:text-white/90 leading-snug mb-2">{f.title}</h3>
@@ -390,7 +399,12 @@ function FeatureCard({ f, delay }: { f: (typeof features)[number]; delay: number
         ) : (
           <div className="relative z-[1] flex flex-col h-full">
             <div className="flex items-start justify-between mb-3">
-              <span className="text-[11px] font-bold tracking-widest" style={{ color: f.color }}>{f.label}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-bold tracking-widest" style={{ color: f.color }}>{f.label}</span>
+                {"ai" in f && f.ai && (
+                  <span className="text-[9px] font-bold tracking-wider px-1.5 py-0.5 rounded-full" style={{ background: `${f.color}15`, color: f.color }}>IA</span>
+                )}
+              </div>
               <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${f.color}18`, color: f.color }}>{f.icon}</div>
             </div>
             <h3 className="text-[16px] font-bold text-slate-800 dark:text-white/90 leading-snug mb-2">{f.title}</h3>

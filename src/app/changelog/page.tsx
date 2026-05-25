@@ -62,8 +62,8 @@ const entries: {
   {
     date: "Maio 2026",
     type: "Novo",
-    title: "Faturação certificada AT via InvoiceXpress",
-    desc: "Emite facturas conformes com ATCUD, envia ao cliente e exporta para o contabilista — sem sair do Bernays. Integração nativa com InvoiceXpress, com suporte a mais providers em breve.",
+    title: "Faturação certificada AT com ATCUD nativo",
+    desc: "Emite facturas conformes com ATCUD, envia ao cliente e exporta para o contabilista — tudo dentro do Bernays, sem ferramentas externas.",
     link: { label: "Módulo Financeiro", href: "/produto/financeiro" },
   },
   {

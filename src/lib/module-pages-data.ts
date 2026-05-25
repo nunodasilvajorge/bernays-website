@@ -73,6 +73,16 @@ export const modulePages: ModulePageData[] = [
         image: { light: "/crescimento-cap3-light.webp", dark: "/crescimento-cap3-dark.webp", alt: "Deal ganho no Bernays com projecto criado automaticamente em Entidades Ligadas" },
       },
       {
+        icon: "Sparkles",
+        title: "Brief estratégico e emails gerados em segundos.",
+        desc: "Introduzes as notas brutas do cliente. O Bernays gera o brief completo com objectivos SMART, message house e calendário editorial — pronto a apresentar. O mesmo assistente rascunha emails de follow-up, envio de proposta ou reactivação com um clique.",
+        bullets: [
+          "Gerador de brief com objectivos SMART, público-alvo e táticas por canal",
+          "Rascunho de email por contexto: cold pitch, follow-up, proposta, reactivação",
+          "Assistente conversacional em qualquer ecrã do módulo (⌘+J)",
+        ],
+      },
+      {
         icon: "Users",
         title: "Da proposta ao projecto, sem sair do Bernays.",
         desc: "Cria a proposta directamente na plataforma. Edita em equipa em tempo real — como no Google Docs, mas integrado no CRM. Envia ao cliente por link, ele assina digitalmente. Quando é aprovada, o projecto é criado automaticamente.",
@@ -136,6 +146,16 @@ export const modulePages: ModulePageData[] = [
         ],
         imageSlotDesc: "Kanban de tarefas com colunas 'A fazer / Em progresso / Aguarda aprovação / Concluído'. Cards com nome da tarefa, consultor atribuído, prazo e prioridade.",
         image: { light: "/delivery-cap2-light.webp", dark: "/delivery-cap2-dark.webp", alt: "Lista de tarefas de projecto no Bernays com estados Concluída e Em curso" },
+      },
+      {
+        icon: "Sparkles",
+        title: "Relatórios e actas sem escrever de raiz.",
+        desc: "O Report Writer gera o relatório de actividade do cliente com resultados, análise de cobertura e próximos passos — a partir dos dados do projecto no Bernays. O Meeting Summarizer transforma notas brutas em actas estruturadas com decisões e responsáveis identificados.",
+        bullets: [
+          "Relatório de cobertura gerado a partir de tarefas e milestones do projecto",
+          "Acta de reunião com decisões e acções identificadas automaticamente",
+          "Output em português europeu, sem clichés de linguagem IA",
+        ],
       },
       {
         icon: "Globe",
@@ -202,6 +222,16 @@ export const modulePages: ModulePageData[] = [
         ],
         imageSlotDesc: "Lista de faturas com badges de estado (verde=pago, amarelo=pendente, vermelho=vencido). Painel com totais 'Em atraso' e 'A vencer este mês'.",
         image: { light: "/financeiro-cap2-light.webp", dark: "/financeiro-cap2-dark.webp", alt: "Lista de faturas do Bernays com estados Emitida, Paga e Vencida e totais por categoria" },
+      },
+      {
+        icon: "Sparkles",
+        title: "Recibos categorizados sem tocar no teclado.",
+        desc: "Fotografa o recibo com o telemóvel. O Bernays extrai fornecedor, valor, IVA, data e categoria — e submete a despesa pré-preenchida para aprovação. A categorização automática usa as categorias da tua agência e indica a confiança por campo.",
+        bullets: [
+          "OCR com Claude Vision: JPEG, PNG, PDF — qualquer formato de recibo ou factura",
+          "Extracção de NIF, IVA (23%), valor base e total em segundos",
+          "Confiança por campo — sabes exactamente o que foi lido com certeza",
+        ],
       },
       {
         icon: "Globe",

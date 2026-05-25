@@ -9,7 +9,7 @@ import {
   TrendingUp, FileCheck, Zap, CheckSquare, Clock, BarChart2,
   PieChart, RefreshCw, ShieldCheck, Users, Calendar, Star,
   CreditCard, FileText, Package, LayoutDashboard, Inbox,
-  Globe, Shield,
+  Globe, Shield, Sparkles,
   type LucideProps,
 } from "lucide-react"
 import { Nav } from "@/components/nav"
@@ -29,7 +29,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   TrendingUp, FileCheck, Zap, CheckSquare, Clock, BarChart2,
   PieChart, RefreshCw, ShieldCheck, Users, Calendar, Star,
   CreditCard, FileText, Package, LayoutDashboard, Inbox,
-  Globe, Shield,
+  Globe, Shield, Sparkles,
 }
 
 function FeatureCard({ title, desc, color, index, inView }: {
