@@ -218,7 +218,7 @@ plataforma-cap{1-3}-{light,dark}.webp
 ```
 logo.svg                  Logo Bernays (SVG, 26×26)
 founder.jpeg              Foto do fundador
-robots.txt                Disallow: / (noindex total por enquanto)
+robots.txt                Allow: / + Sitemap (indexação aberta desde 2026-08-13)
 ```
 
 As imagens hero da homepage (`finance-light/dark.webp`) são **preloaded** no `<head>` do root layout para melhorar o LCP.
@@ -255,9 +255,17 @@ Formulário de candidatura ao programa Academia.
 
 ## SEO e Indexação
 
-**Estado actual:** `robots: "noindex, nofollow"` em `metadata` e header `X-Robots-Tag: noindex, nofollow` em `next.config.ts`. O site **não está a ser indexado pelo Google**.
+**Estado actual:** indexação **aberta** (lançamento público, 2026-08-13).
 
-Isto é intencional durante a fase de acesso antecipado e deve ser revertido antes do lançamento público.
+Estiveram **três** camadas a bloquear ao mesmo tempo, e é a lição a reter: levantar só uma não muda nada, porque o Google respeita a mais restritiva.
+
+| camada | onde | ordem de força |
+|---|---|---|
+| `X-Robots-Tag: noindex, nofollow` | `next.config.ts` (header) | a mais forte — aplica-se a tudo o que a rota serve |
+| `robots: "noindex, nofollow"` | `app/layout.tsx` (metadata) | ganha ao robots.txt |
+| `Disallow: /` | `public/robots.txt` | a mais fraca — só impede o rastreio, não a indexação |
+
+`/privacidade` e `/termos` mantêm `noindex` no metadata da própria página, deliberadamente.
 
 **OG/Twitter:** configurados com título, descrição e `locale: pt_PT`.
 
@@ -358,4 +366,4 @@ Constantes em `pricing.tsx`: `BASE_MONTHLY`, `PER_USER_MONTHLY`, `BASE_ANNUAL`, 
 - Tema arranca sempre `dark` no SSR (classe `dark` no `<html>`), corrigido client-side pelo `ThemeProvider`. Sem flash visível porque a cor de fundo dark está em CSS.
 - Não há biblioteca de componentes UI (shadcn, etc.) — todos os componentes são built from scratch com Tailwind.
 - Não há testes (unit nem E2E).
-- `robots.txt` faz `Disallow: /` — confirmar remoção antes de lançamento público.
+- Indexação aberta desde 2026-08-13. Se alguma vez voltar a fechar-se, são **três** os sítios a mexer (ver secção SEO) — meia medida não fecha nada.

@@ -1,2 +1,15 @@
+# bernays.pt — indexação aberta (lançamento público).
+#
+# Esteve `Disallow: /` desde o commit inicial, por ser fase de acesso
+# antecipado. Havia TRÊS camadas a bloquear ao mesmo tempo — este ficheiro, o
+# `robots` do metadata em `app/layout.tsx` e o header `X-Robots-Tag` no
+# `next.config.ts`. Levantar só uma não servia de nada: o Google respeita a
+# mais restritiva, e o header e a meta tag ganham ao robots.txt.
+
 User-agent: *
-Disallow: /
+Allow: /
+
+# As páginas legais ficam fora do índice pelo `robots` do próprio metadata
+# (app/privacidade e app/termos) — não vale a pena repeti-lo aqui.
+
+Sitemap: https://bernays.pt/sitemap.xml

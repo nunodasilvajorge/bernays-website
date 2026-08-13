@@ -16,13 +16,19 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bernays.pt"),
-  title: "Bernays — O sistema nervoso da tua agência de RP",
+  title: "Bernays — O sistema operativo da tua agência de RP",
   description:
     "Pipeline, projetos, faturas, equipa. O Bernays absorve a complexidade operacional para que os teus consultores se concentrem nas estratégias dos clientes.",
-  robots: "noindex, nofollow",
+  // Indexação aberta (lançamento público). As páginas legais mantêm o seu
+  // próprio `noindex` — ver app/privacidade e app/termos.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
   icons: { icon: "/logo.svg" },
   openGraph: {
-    title: "Bernays — O sistema nervoso da tua agência de RP",
+    title: "Bernays — O sistema operativo da tua agência de RP",
     description:
       "CRM, delivery, faturação, equipa, escritório e workspace. Um único sistema integrado de raiz para agências de Relações Públicas.",
     url: "https://bernays.pt",
@@ -32,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bernays — O sistema nervoso da tua agência de RP",
+    title: "Bernays — O sistema operativo da tua agência de RP",
     description:
       "CRM, delivery, faturação, equipa, escritório e workspace. Um único sistema integrado de raiz para agências de Relações Públicas.",
   },
@@ -42,9 +48,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt" className={`${inter.variable} dark`} suppressHydrationWarning>
       <head>
-        {/* Preload hero images to improve LCP */}
+        {/* Pre-warm TLS to the app domain so clicking "Entrar" is instant */}
+        <link rel="preconnect" href="https://app.bernays.pt" />
+        <link rel="dns-prefetch" href="https://app.bernays.pt" />
+        {/* Preload first hero slide (LCP) */}
         <link rel="preload" as="image" href="/finance-dark.webp" />
         <link rel="preload" as="image" href="/finance-light.webp" />
+        {/* Prefetch subsequent hero cycling slides (idle-time, non-blocking) */}
+        <link rel="prefetch" as="image" href="/growth-dark.webp" />
+        <link rel="prefetch" as="image" href="/growth-light.webp" />
+        <link rel="prefetch" as="image" href="/delivery-dark.webp" />
+        <link rel="prefetch" as="image" href="/delivery-light.webp" />
       </head>
       <body>
         <a
