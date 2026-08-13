@@ -19,7 +19,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/sobre`, lastModified: now, changeFrequency: "yearly", priority: 0.7 },
     { url: `${BASE}/agenda`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/changelog`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
-    { url: `${BASE}/privacidade`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${BASE}/termos`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    // ⚠️ `/privacidade` e `/termos` NÃO entram: têm `robots: noindex` no
+    // metadata da própria página, de propósito. Um sitemap é um PEDIDO de
+    // indexação — pedir a indexação de uma página que se marcou como
+    // não-indexável é contradizer-se, e o Search Console reporta-o como erro
+    // («Submitted URL marked 'noindex'»). Se um dia se quiser que sejam
+    // indexadas, tira-se o noindex delas E acrescentam-se aqui.
   ]
 }

@@ -9,10 +9,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!mod) {
     return { title: "Bernays", robots: "noindex, nofollow" }
   }
+  // Sem `robots` aqui: herda o do root layout (index, follow). O `noindex` do
+  // ramo de cima é para um slug que não existe, e esse mantém-se.
   return {
     title: `${mod.label} — Bernays`,
     description: mod.description,
-    robots: "noindex, nofollow",
   }
 }
 

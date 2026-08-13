@@ -1,10 +1,9 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Sobre o Fundador — Bernays",
+  title: "A visão — Bernays",
   description:
-    "Nuno da Silva Jorge — professor de Relações Públicas, investigador na ESCS-IPL e fundador do Bernays. A história de como a investigação académica criou o ERP para agências de RP.",
-  robots: "noindex, nofollow",
+    "Uma nova era das Relações Públicas. Software que liberta os consultores de RP para comunicar com impacto — e torna a agência mais rentável.",
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
