@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { TrendingUp, Users, Clock } from "lucide-react"
 import { FadeIn } from "@/lib/animate"
-import { useRef, useState } from "react"
+import { useSpotlight } from "@/lib/spotlight"
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -47,12 +47,11 @@ const personas = [
 ]
 
 function PersonaCard({ p, delay }: { p: typeof personas[0]; delay: number }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [spot, setSpot] = useState<{ x: number; y: number } | null>(null)
+  const { ref, onMouseMove, onMouseEnter, onMouseLeave, spotOverlay } = useSpotlight(p.color)
 
   return (
     <motion.div
-      ref={cardRef}
+      ref={ref}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -4, scale: 1.01 }}
@@ -60,28 +59,11 @@ function PersonaCard({ p, delay }: { p: typeof personas[0]; delay: number }) {
       transition={{ duration: 0.5, delay, ease }}
       className="group relative overflow-hidden rounded-2xl border p-6 flex flex-col cursor-default"
       style={{ background: "var(--page-card)", borderColor: "var(--page-border)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
-      onMouseMove={(e) => {
-        const rect = cardRef.current?.getBoundingClientRect()
-        if (!rect) return
-        setSpot({ x: e.clientX - rect.left, y: e.clientY - rect.top })
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = `${p.color}55`
-        e.currentTarget.style.boxShadow = `0 0 32px ${p.color}18, 0 8px 32px rgba(0,0,0,0.08)`
-      }}
-      onMouseLeave={(e) => {
-        setSpot(null)
-        e.currentTarget.style.borderColor = "var(--page-border)"
-        e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)"
-      }}
+      onMouseMove={onMouseMove}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
-      {spot && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{ background: `radial-gradient(280px circle at ${spot.x}px ${spot.y}px, ${p.color}14 0%, transparent 70%)` }}
-        />
-      )}
+      {spotOverlay}
 
       <div className="relative z-[1] flex flex-col h-full">
         <div
@@ -130,19 +112,19 @@ export function Personas() {
             Para quem
           </p>
           <h2
-            className="text-[clamp(32px,4.5vw,54px)] font-extrabold tracking-[-0.035em] text-slate-900 dark:text-white leading-[1.05] max-w-2xl"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[clamp(32px,4.5vw,54px)] font-extrabold tracking-[-0.035em] leading-[1.05] max-w-2xl"
+            style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
           >
-            Uma plataforma.{" "}
+            O mesmo sistema.{" "}
             <span
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "linear-gradient(135deg, oklch(0.581 0.243 263) 0%, oklch(0.65 0.18 253) 100%)" }}
             >
-              Toda a agência.
+              Cada papel da agência.
             </span>
           </h2>
           <p className="text-[16px] mt-4 leading-relaxed max-w-xl" style={{ color: "var(--page-text-muted)" }}>
-            Cada função vê o que precisa e faz o que deve — sem fricção, sem ferramentas extra.
+            O sócio vê a rentabilidade. O gestor de conta vê os projectos. O consultor vê as suas tarefas. Cada um com o que precisa, no mesmo sistema.
           </p>
         </FadeIn>
 

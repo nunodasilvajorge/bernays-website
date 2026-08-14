@@ -48,8 +48,8 @@ export function Statement({ plain, accent, sub }: StatementProps) {
           initial={{ opacity: 0, y: 36 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.75, ease }}
-          className="text-[clamp(44px,8vw,100px)] font-extrabold tracking-[-0.05em] leading-[0.95] text-slate-900 dark:text-white"
-          style={{ fontFamily: "var(--font-display)" }}
+          className="text-[clamp(44px,8vw,100px)] font-extrabold tracking-[-0.05em] leading-[0.95]"
+          style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
         >
           {plain}{" "}
           <span

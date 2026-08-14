@@ -17,7 +17,7 @@ const rows = [
   {
     label: "Integração",
     generic: "Pipeline aqui, horas no Toggl, faturas no InvoiceXpress, RH noutro sítio",
-    bernays: "Um deal fechado cria o projecto. Um projecto fechado gera a fatura. Automático.",
+    bernays: "Um negócio fechado cria o projecto. Um projecto fechado gera a fatura. Automático.",
   },
   {
     label: "Faturação AT",
@@ -48,8 +48,8 @@ export function Comparison() {
             Por que o Bernays
           </p>
           <h2
-            className="text-[clamp(32px,4.5vw,54px)] font-extrabold tracking-[-0.035em] text-slate-900 dark:text-white leading-[1.05] mb-4 max-w-2xl"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[clamp(32px,4.5vw,54px)] font-extrabold tracking-[-0.035em] leading-[1.05] mb-4 max-w-2xl"
+            style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
           >
             Não é mais uma ferramenta de produtividade.
           </h2>

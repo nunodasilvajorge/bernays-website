@@ -153,7 +153,7 @@ export function Faq() {
             className="text-[clamp(36px,5vw,58px)] font-extrabold tracking-[-0.035em] leading-[1.05]"
             style={{ color: "var(--page-text)", fontFamily: "var(--font-display)" }}
           >
-            Tudo o que precisas de saber.
+            Respostas directas às perguntas certas.
           </h2>
         </FadeIn>
 
@@ -186,12 +186,10 @@ export function Faq() {
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <a
-                href="https://calendly.com/nuno-dasilvajorge/15m"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/agenda"
                 className="flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-semibold px-5 py-2.5 rounded-xl text-[14px] transition-colors duration-150"
               >
-                Marcar 15 min
+                Agendar demo
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                   <path d="M2.5 7h9M7 2.5L11.5 7 7 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

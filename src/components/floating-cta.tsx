@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 
-const DEMO_URL = process.env.NEXT_PUBLIC_DEMO_URL ?? "https://demo.bernays.pt"
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.bernays.pt"
 const ease = [0.22, 1, 0.36, 1] as const
 
 export function FloatingCta() {
@@ -33,11 +33,9 @@ export function FloatingCta() {
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.96 }}>
               <Link
                 href="/agenda"
-                className="inline-flex items-center gap-1.5 border text-[13px] font-semibold px-4 py-2.5 rounded-full transition-all duration-150 hover:border-brand/40 hover:text-brand"
+                className="inline-flex items-center gap-1.5 border text-[13px] font-semibold px-4 py-2.5 rounded-full transition-all duration-150 [color:var(--page-text-muted)] [border-color:var(--page-border)] hover:border-brand/40 hover:text-brand"
                 style={{
                   background: "var(--page-bg)",
-                  borderColor: "var(--page-border)",
-                  color: "var(--page-text-muted)",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
                 }}
               >
@@ -45,15 +43,13 @@ export function FloatingCta() {
               </Link>
             </motion.div>
             <motion.a
-              href={DEMO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`${APP_URL}/login?signup=1`}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.96 }}
               className="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-semibold px-5 py-2.5 rounded-full text-[14px] transition-colors duration-150"
               style={{ boxShadow: "0 4px 24px oklch(0.581 0.243 263 / 0.45), 0 2px 8px rgba(0,0,0,0.2)" }}
             >
-              Ver demo
+              Começar
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M2.5 7H11.5M7.5 3L11.5 7L7.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -81,18 +77,15 @@ export function FloatingCta() {
             <div className="flex gap-2">
               <Link
                 href="/agenda"
-                className="flex items-center justify-center border font-semibold py-3 rounded-xl text-[15px] transition-colors duration-150 flex-1 hover:border-brand/40 hover:text-brand"
-                style={{ borderColor: "var(--page-border)", color: "var(--page-text-muted)" }}
+                className="flex items-center justify-center border font-semibold py-3 rounded-xl text-[15px] transition-colors duration-150 flex-1 [color:var(--page-text-muted)] [border-color:var(--page-border)] hover:border-brand/40 hover:text-brand"
               >
                 Marcar demo
               </Link>
               <a
-                href={DEMO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`${APP_URL}/login?signup=1`}
                 className="flex items-center justify-center gap-2 bg-brand hover:bg-brand-hover text-white font-semibold py-3 rounded-xl text-[15px] transition-colors duration-150 flex-[2]"
               >
-                Ver demo
+                Começar
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                   <path d="M2.5 7H11.5M7.5 3L11.5 7L7.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

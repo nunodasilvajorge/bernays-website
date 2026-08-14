@@ -13,7 +13,7 @@ export default async function OgImage({ params }: Props) {
   const color = mod?.color ?? "#6366f1"
   const label = mod?.label ?? "Bernays"
   const tagline = mod?.tagline ?? "Produto"
-  const description = mod?.description ?? "O sistema nervoso da tua agência de RP."
+  const description = mod?.description ?? "O sistema operativo da tua agência de RP."
 
   return new ImageResponse(
     <div

@@ -92,6 +92,7 @@ export function Academia() {
               <p className="text-[13px] font-medium mb-3" style={{ color: "var(--page-text-faint)" }}>
                 Deixa o teu email institucional e entramos em contacto.
               </p>
+              <div aria-live="polite" aria-atomic="true">
               <AnimatePresence mode="wait">
                 {state === "success" ? (
                   <motion.div
@@ -134,8 +135,9 @@ export function Academia() {
                   </motion.form>
                 )}
               </AnimatePresence>
+              </div>
               {state === "error" && (
-                <p className="text-[12px] text-red-500 mt-2">Algo correu mal. Tenta outra vez.</p>
+                <p className="text-[12px] text-red-500 mt-2" role="alert">Algo correu mal. Tenta outra vez.</p>
               )}
             </div>
           </FadeIn>

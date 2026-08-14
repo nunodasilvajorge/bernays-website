@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og"
 
-export const alt = "Bernays — O sistema nervoso da tua agência de RP"
+export const alt = "Bernays — O sistema operativo da tua agência de RP"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
@@ -54,7 +54,7 @@ export default function OgImage() {
             marginBottom: 12,
           }}
         >
-          O sistema nervoso
+          O sistema operativo
         </div>
         <div
           style={{

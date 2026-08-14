@@ -1,7 +1,8 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef } from "react"
+import { useSpotlight } from "@/lib/spotlight"
 import {
   TrendingUp,
   CheckSquare,
@@ -344,41 +345,23 @@ const features = [
   },
 ]
 
-function FeatureCard({ f, delay }: { f: (typeof features)[number]; delay: number }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [spot, setSpot] = useState<{ x: number; y: number } | null>(null)
+function FeatureCard({ f, delay, wrapperClass }: { f: (typeof features)[number]; delay: number; wrapperClass?: string }) {
+  const { ref, onMouseMove, onMouseEnter, onMouseLeave, spotOverlay } = useSpotlight(f.color)
   const isWide = "wide" in f && f.wide
 
   return (
-    <FadeIn delay={delay} className={f.span}>
+    <FadeIn delay={delay} className={wrapperClass ?? f.span}>
       <motion.div
-        ref={cardRef}
+        ref={ref}
         whileHover={{ y: -4, scale: 1.01 }}
         transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
         className={`group relative overflow-hidden rounded-2xl p-6 border cursor-default h-full ${f.minH}${isWide ? " md:flex md:items-center md:gap-12" : ""}`}
         style={{ background: "var(--page-card)", borderColor: "var(--page-border)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
-        onMouseMove={(e) => {
-          const rect = cardRef.current?.getBoundingClientRect()
-          if (!rect) return
-          setSpot({ x: e.clientX - rect.left, y: e.clientY - rect.top })
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = `${f.color}55`
-          e.currentTarget.style.boxShadow = `0 0 32px ${f.color}18, 0 8px 32px rgba(0,0,0,0.08)`
-        }}
-        onMouseLeave={(e) => {
-          setSpot(null)
-          e.currentTarget.style.borderColor = "var(--page-border)"
-          e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)"
-        }}
+        onMouseMove={onMouseMove}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
-        {spot && (
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
-            style={{ background: `radial-gradient(280px circle at ${spot.x}px ${spot.y}px, ${f.color}14 0%, transparent 70%)` }}
-          />
-        )}
+        {spotOverlay}
         {isWide ? (
           <>
             <div className="md:w-80 shrink-0 relative z-[1]">
@@ -391,8 +374,8 @@ function FeatureCard({ f, delay }: { f: (typeof features)[number]; delay: number
                 </div>
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${f.color}18`, color: f.color }}>{f.icon}</div>
               </div>
-              <h3 className="text-[16px] font-bold text-slate-800 dark:text-white/90 leading-snug mb-2">{f.title}</h3>
-              <p className="text-[13px] text-slate-500 dark:text-white/40 leading-relaxed">{f.body}</p>
+              <h3 className="text-[16px] font-bold leading-snug mb-2" style={{ color: "var(--page-text)" }}>{f.title}</h3>
+              <p className="text-[13px] leading-relaxed" style={{ color: "var(--page-text-muted)" }}>{f.body}</p>
             </div>
             <div className="flex-1 mt-4 md:mt-0 relative z-[1]">{f.mockup}</div>
           </>
@@ -407,8 +390,8 @@ function FeatureCard({ f, delay }: { f: (typeof features)[number]; delay: number
               </div>
               <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${f.color}18`, color: f.color }}>{f.icon}</div>
             </div>
-            <h3 className="text-[16px] font-bold text-slate-800 dark:text-white/90 leading-snug mb-2">{f.title}</h3>
-            <p className="text-[13px] text-slate-500 dark:text-white/40 leading-relaxed">{f.body}</p>
+            <h3 className="text-[16px] font-bold leading-snug mb-2" style={{ color: "var(--page-text)" }}>{f.title}</h3>
+            <p className="text-[13px] leading-relaxed" style={{ color: "var(--page-text-muted)" }}>{f.body}</p>
             {f.mockup && <div className="mt-2">{f.mockup}</div>}
           </div>
         )}
@@ -421,17 +404,17 @@ export function Features() {
   return (
     <section
       id="funcionalidades"
-      className="relative py-16 md:py-36 px-6"
+      className="relative py-16 md:py-36"
       style={{ background: "var(--page-surface)" }}
     >
-      <div className="max-w-5xl mx-auto">
-        <FadeIn className="text-center mb-14">
+      <div className="max-w-5xl mx-auto px-6">
+        <FadeIn className="mb-14">
           <p className="text-sm font-semibold text-brand tracking-widest uppercase mb-4">
             Funcionalidades
           </p>
           <h2
-            className="text-[clamp(40px,5.5vw,68px)] font-extrabold tracking-[-0.035em] text-slate-900 dark:text-white leading-[1.05]"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[clamp(40px,5.5vw,68px)] font-extrabold tracking-[-0.035em] leading-[1.05]"
+            style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
           >
             Uma agência,{" "}
             <span
@@ -441,16 +424,30 @@ export function Features() {
               um só sistema.
             </span>
           </h2>
-          <p className="mt-5 text-[17px] text-slate-500 dark:text-white/45 max-w-lg mx-auto leading-relaxed">
+          <p className="mt-5 text-[17px] max-w-xl leading-relaxed" style={{ color: "var(--page-text-muted)" }}>
             Cada módulo alimenta os outros. Não é uma suite de ferramentas. É um organismo.
           </p>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Desktop: bento grid */}
+        <div className="hidden md:grid md:grid-cols-3 gap-4">
           {features.map((f, i) => (
             <FeatureCard key={f.id} f={f} delay={i * 0.06} />
           ))}
         </div>
+      </div>
+
+      {/* Mobile: horizontal scroll carousel */}
+      <div className="md:hidden mt-10 -mx-0 overflow-x-auto scrollbar-hide snap-x snap-mandatory flex gap-3 pb-4 px-6">
+        {features.map((f) => (
+          <div
+            key={f.id}
+            className={`snap-start shrink-0 ${f.id === "workspace" ? "w-[85vw]" : "w-[76vw]"}`}
+          >
+            <FeatureCard f={f} delay={0} wrapperClass="w-full" />
+          </div>
+        ))}
+        <div className="shrink-0 w-3" aria-hidden="true" />
       </div>
     </section>
   )

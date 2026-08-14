@@ -15,7 +15,6 @@ import {
 import { Nav } from "@/components/nav"
 import { Footer } from "@/components/footer"
 import { FloatingCta } from "@/components/floating-cta"
-import { ScrollProgress } from "@/components/scroll-progress"
 import { FadeIn } from "@/lib/animate"
 import { modules } from "@/lib/features-data"
 import { modulePages, type Capability } from "@/lib/module-pages-data"
@@ -321,7 +320,6 @@ export function ModulePageContent({ slug }: { slug: string }) {
 
   return (
     <main style={{ background: "var(--page-bg)" }}>
-      <ScrollProgress />
       <Nav />
       <FloatingCta />
 

@@ -71,10 +71,10 @@ function StepCard({ step, delay }: { step: typeof steps[0]; delay: number }) {
         >
           {step.n}
         </div>
-        <h3 className="text-[18px] font-bold text-slate-900 dark:text-white mb-2 leading-snug">
+        <h3 className="text-[18px] font-bold mb-2 leading-snug" style={{ color: "var(--page-text)" }}>
           {step.title}
         </h3>
-        <p className="text-[14px] text-slate-500 dark:text-white/45 leading-relaxed">
+        <p className="text-[14px] leading-relaxed" style={{ color: "var(--page-text-muted)" }}>
           {step.body}
         </p>
       </div>
@@ -89,8 +89,8 @@ export function Migration() {
         <FadeIn className="mb-14">
           <p className="text-sm font-semibold text-brand tracking-widest uppercase mb-4">Migração</p>
           <h2
-            className="text-[clamp(32px,4.5vw,54px)] font-extrabold tracking-[-0.035em] text-slate-900 dark:text-white leading-[1.05] mb-3"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[clamp(32px,4.5vw,54px)] font-extrabold tracking-[-0.035em] leading-[1.05] mb-3"
+            style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
           >
             Mudar não tem de ser difícil.{" "}
             <span
@@ -100,7 +100,7 @@ export function Migration() {
               São 3 passos.
             </span>
           </h2>
-          <p className="text-[16px] text-slate-500 dark:text-white/45 leading-relaxed">
+          <p className="text-[16px] leading-relaxed" style={{ color: "var(--page-text-muted)" }}>
             A maioria das agências está operacional em menos de uma hora.
           </p>
         </FadeIn>

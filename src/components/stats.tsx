@@ -86,10 +86,10 @@ function StatCard({ m, delay }: { m: typeof metrics[0]; delay: number }) {
         >
           <AnimatedNumber value={m.value} format={m.format} duration={1.4} />
         </div>
-        <p className="text-[16px] font-bold text-slate-900 dark:text-white leading-snug">
+        <p className="text-[16px] font-bold leading-snug" style={{ color: "var(--page-text)" }}>
           {m.label}
         </p>
-        <p className="text-[14px] text-slate-500 dark:text-white/40 leading-relaxed">
+        <p className="text-[14px] leading-relaxed" style={{ color: "var(--page-text-muted)" }}>
           {m.sub}
         </p>
       </div>
@@ -107,8 +107,8 @@ export function Stats() {
         <FadeIn className="mb-12">
           <p className="text-sm font-semibold text-brand tracking-widest uppercase mb-4">Impacto real</p>
           <h2
-            className="text-[clamp(32px,4.5vw,54px)] font-extrabold tracking-[-0.035em] text-slate-900 dark:text-white leading-[1.05]"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[clamp(32px,4.5vw,54px)] font-extrabold tracking-[-0.035em] leading-[1.05]"
+            style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
           >
             O que muda quando{" "}
             <span

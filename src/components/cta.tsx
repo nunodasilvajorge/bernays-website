@@ -3,7 +3,7 @@
 import { useState, useRef } from "react"
 import { motion, AnimatePresence, useInView } from "framer-motion"
 
-const DEMO_URL = process.env.NEXT_PUBLIC_DEMO_URL ?? "https://demo.bernays.pt"
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.bernays.pt"
 const ease = [0.22, 1, 0.36, 1] as const
 
 export function Cta() {
@@ -71,8 +71,8 @@ export function Cta() {
           initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.08, ease }}
-          className="text-[clamp(48px,8vw,100px)] font-extrabold tracking-[-0.05em] leading-[0.95] text-slate-900 dark:text-white mb-8"
-          style={{ fontFamily: "var(--font-display)" }}
+          className="text-[clamp(48px,8vw,100px)] font-extrabold tracking-[-0.05em] leading-[0.95] mb-8"
+          style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
         >
           A tua agência{" "}
           <span
@@ -102,14 +102,14 @@ export function Cta() {
           className="mb-6"
         >
           <motion.a
-            href={DEMO_URL}
+            href={`${APP_URL}/login?signup=1`}
             whileHover={{ scale: 1.03, y: -3 }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.15 }}
             className="inline-flex items-center gap-2.5 bg-brand hover:bg-brand-hover text-white font-bold px-10 py-4 rounded-xl text-[17px] transition-colors duration-150"
             style={{ boxShadow: "0 0 64px oklch(0.581 0.243 263 / 0.45), 0 4px 24px oklch(0.581 0.243 263 / 0.3)" }}
           >
-            Começar agora — sem registo
+            Começar agora
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
               <path d="M3.5 9H14.5M9.5 4L14.5 9L9.5 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -130,6 +130,7 @@ export function Cta() {
           <p className="text-[13px] font-medium mb-3" style={{ color: "var(--page-text-faint)" }}>
             Preferes que entremos em contacto?
           </p>
+          <div aria-live="polite" aria-atomic="true">
           <AnimatePresence mode="wait">
             {state === "success" ? (
               <motion.div
@@ -172,8 +173,9 @@ export function Cta() {
               </motion.form>
             )}
           </AnimatePresence>
+          </div>
           {state === "error" && (
-            <p className="text-[12px] text-red-500 mt-2 text-center">
+            <p className="text-[12px] text-red-500 mt-2 text-center" role="alert">
               Algo correu mal. Tenta outra vez.
             </p>
           )}

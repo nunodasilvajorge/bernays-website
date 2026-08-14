@@ -11,7 +11,7 @@ import {
 import { useTheme } from "@/lib/theme"
 import { useState, useEffect, useRef } from "react"
 
-const DEMO_URL = process.env.NEXT_PUBLIC_DEMO_URL ?? "https://demo.bernays.pt"
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.bernays.pt"
 const ease = [0.22, 1, 0.36, 1] as const
 
 const navModules = [
@@ -52,6 +52,13 @@ export function Nav() {
 
   useEffect(() => { setFlyoutOpen(false) }, [pathname])
   useEffect(() => () => clearTimeout(closeDelay.current), [])
+
+  useEffect(() => {
+    if (!flyoutOpen) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setFlyoutOpen(false) }
+    document.addEventListener("keydown", onKey)
+    return () => document.removeEventListener("keydown", onKey)
+  }, [flyoutOpen])
 
   function resolveHref(raw: string): string {
     if (raw.startsWith("/#")) return isHome ? raw.slice(1) : raw
@@ -106,17 +113,18 @@ export function Nav() {
   function renderLinkInner(l: typeof links[0], isActive: boolean) {
     return (
       <>
-        <span className={
-          isActive
+        <span
+          className={isActive
             ? "text-brand dark:text-brand-light font-medium"
-            : "text-slate-500 hover:text-slate-800 dark:text-white/50 dark:hover:text-white/80"
-        }>
+            : "inline-block [color:var(--page-text-muted)] hover:text-brand dark:hover:text-brand-light transition-all duration-200 hover:-translate-y-px"
+          }
+        >
           {l.label}
         </span>
         {isActive && (
           <motion.div
             layoutId="nav-indicator"
-            className="absolute -bottom-1 left-0 right-0 h-px bg-brand rounded-full"
+            className="absolute -bottom-1 left-0 right-0 h-[2px] bg-brand rounded-full"
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           />
         )}
@@ -138,7 +146,7 @@ export function Nav() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0">
           <Image src="/logo.svg" alt="Bernays" width={26} height={26} className="rounded-[5px]" />
-          <span className="text-[15px] font-semibold tracking-tight text-slate-900 dark:text-white">
+          <span className="text-[15px] font-semibold tracking-tight" style={{ color: "var(--page-text)" }}>
             Bernays
           </span>
         </Link>
@@ -157,8 +165,16 @@ export function Nav() {
                   className="relative"
                   onMouseEnter={openFlyout}
                   onMouseLeave={scheduleFlyoutClose}
+                  onFocusCapture={openFlyout}
+                  onBlurCapture={scheduleFlyoutClose}
                 >
-                  <Link href={l.href} className={cls} onClick={() => setFlyoutOpen(false)}>
+                  <Link
+                    href={l.href}
+                    className={cls}
+                    aria-haspopup="true"
+                    aria-expanded={flyoutOpen}
+                    onClick={() => setFlyoutOpen(false)}
+                  >
                     {renderLinkInner(l, isActive)}
                   </Link>
 
@@ -250,27 +266,32 @@ export function Nav() {
           <button
             onClick={toggle}
             aria-label="Alternar tema"
-            className="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-700 dark:text-white/40 dark:hover:text-white/70 hover:bg-black/5 dark:hover:bg-white/[0.07] transition-all duration-200"
+            className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-black/5 dark:hover:bg-white/[0.07] transition-all duration-200" style={{ color: "var(--page-text-faint)" }}
           >
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
           <div className="w-px h-4 mx-2" style={{ background: "var(--page-border)" }} />
 
+          <a
+            href={`${APP_URL}/login`}
+            className="inline-block text-[13px] font-medium [color:var(--page-text-faint)] transition-all duration-200 hover:text-brand dark:hover:text-brand-light hover:-translate-y-px mr-2"
+          >
+            Entrar
+          </a>
+
           <Link
             href="/agenda"
-            className="text-[13px] font-medium px-3 py-1.5 rounded-lg text-slate-500 dark:text-white/45 hover:text-slate-800 dark:hover:text-white/80 hover:bg-black/[0.04] dark:hover:bg-white/[0.05] transition-all duration-200"
+            className="inline-flex items-center text-[13px] font-medium px-3 py-1.5 rounded-xl border [color:var(--page-text-muted)] [border-color:var(--page-border)] transition-all duration-200 hover:text-brand dark:hover:text-brand-light hover:border-brand/40 hover:-translate-y-px"
           >
             Marcar demo
           </Link>
 
           <a
-            href={DEMO_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`${APP_URL}/login?signup=1`}
             className="flex items-center gap-1.5 bg-brand hover:bg-brand-hover text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all duration-150 hover:shadow-[0_0_24px_oklch(0.581_0.243_263_/_0.45)] hover:-translate-y-px ml-1"
           >
-            Ver demo
+            Começar
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M2.5 7H11.5M7.5 3L11.5 7L7.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -282,7 +303,7 @@ export function Nav() {
           <button
             onClick={toggle}
             aria-label="Alternar tema"
-            className="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-700 dark:text-white/40 dark:hover:text-white/70 hover:bg-black/5 dark:hover:bg-white/[0.07] transition-all duration-200"
+            className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-black/5 dark:hover:bg-white/[0.07] transition-all duration-200" style={{ color: "var(--page-text-faint)" }}
           >
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
@@ -305,8 +326,8 @@ export function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative md:hidden border-t px-6 py-4 flex flex-col gap-1 bg-white/95 dark:bg-[#07080e]/95 backdrop-blur-2xl"
-            style={{ borderColor: "var(--page-border)" }}
+            className="relative md:hidden border-t px-6 py-4 flex flex-col gap-1 backdrop-blur-2xl"
+            style={{ background: "color-mix(in oklch, var(--page-bg) 95%, transparent)", borderColor: "var(--page-border)" }}
           >
             {links.map((l) => {
               const resolved = resolveHref(l.href)
@@ -314,7 +335,7 @@ export function Nav() {
               const cls = `py-2.5 text-[15px] font-medium transition-colors duration-150 ${
                 isActive
                   ? "text-brand dark:text-brand-light"
-                  : "text-slate-700 dark:text-white/70 hover:text-brand dark:hover:text-brand-light"
+                  : "[color:var(--page-text-muted)] hover:text-brand dark:hover:text-brand-light"
               }`
               return resolved.includes("#") ? (
                 <a key={l.href} href={resolved} onClick={close} className={cls}>{l.label}</a>
@@ -354,22 +375,26 @@ export function Nav() {
             </div>
 
             <div className="flex flex-col gap-2 mt-3 pt-3 border-t" style={{ borderColor: "var(--page-border)" }}>
+              <a
+                href={`${APP_URL}/login`}
+                onClick={close}
+                className="flex items-center justify-center text-[14px] font-medium py-2 transition-colors duration-150 [color:var(--page-text-faint)] hover:text-brand"
+              >
+                Já tens conta? Entrar →
+              </a>
               <Link
                 href="/agenda"
                 onClick={close}
-                className="flex items-center justify-center gap-2 border font-semibold py-3 rounded-xl text-[15px] transition-colors duration-150 hover:text-brand dark:hover:text-brand-light hover:border-brand/40"
-                style={{ borderColor: "var(--page-border)", color: "var(--page-text-muted)" }}
+                className="flex items-center justify-center gap-2 border font-semibold py-3 rounded-xl text-[15px] transition-all duration-150 [color:var(--page-text-muted)] [border-color:var(--page-border)] hover:text-brand dark:hover:text-brand-light hover:border-brand/40 active:scale-[0.98]"
               >
                 Marcar demo
               </Link>
               <a
-                href={DEMO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`${APP_URL}/login?signup=1`}
                 onClick={close}
                 className="flex items-center justify-center gap-2 bg-brand hover:bg-brand-hover text-white font-semibold py-3 rounded-xl text-[15px] transition-colors duration-150"
               >
-                Ver demo
+                Começar
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                   <path d="M2.5 7H11.5M7.5 3L11.5 7L7.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

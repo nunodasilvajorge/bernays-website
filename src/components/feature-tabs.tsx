@@ -102,7 +102,7 @@ export function FeatureTabs() {
             className="text-[clamp(30px,4.5vw,52px)] font-extrabold tracking-[-0.035em] leading-[1.05]"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            <span className="text-slate-900 dark:text-white">Vê o Bernays </span>
+            <span style={{ color: "var(--page-text)" }}>Vê o Bernays </span>
             <span
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "linear-gradient(135deg, oklch(0.581 0.243 263) 0%, oklch(0.65 0.18 253) 100%)" }}
@@ -162,12 +162,12 @@ export function FeatureTabs() {
                 {tab.label}
               </div>
               <h3
-                className="text-[clamp(20px,2.5vw,28px)] font-extrabold tracking-[-0.03em] text-slate-900 dark:text-white leading-snug mb-4"
-                style={{ fontFamily: "var(--font-display)" }}
+                className="text-[clamp(20px,2.5vw,28px)] font-extrabold tracking-[-0.03em] leading-snug mb-4"
+                style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
               >
                 {tab.title}
               </h3>
-              <p className="text-[15px] text-slate-500 dark:text-white/45 leading-relaxed">
+              <p className="text-[15px] leading-relaxed" style={{ color: "var(--page-text-muted)" }}>
                 {tab.body}
               </p>
 

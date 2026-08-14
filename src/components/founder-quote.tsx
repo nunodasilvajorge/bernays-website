@@ -54,12 +54,12 @@ export function FounderQuote() {
                     height={40}
                     className="w-10 h-10 rounded-full object-cover shrink-0"
                   />
-                  <div>
+                  <cite className="not-italic">
                     <a
                       href="https://www.linkedin.com/in/nunodasilvajorge/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[14px] font-semibold hover:underline"
+                      className="text-[14px] font-semibold hover:underline block"
                       style={{ color: "var(--page-text)" }}
                     >
                       Nuno da Silva Jorge
@@ -67,7 +67,7 @@ export function FounderQuote() {
                     <p className="text-[12px]" style={{ color: "var(--page-text-faint)" }}>
                       Fundador do Bernays · Professor de Relações Públicas
                     </p>
-                  </div>
+                  </cite>
                 </footer>
               </blockquote>
             </div>

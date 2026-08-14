@@ -47,8 +47,8 @@ export function Origin() {
         <FadeIn className="mb-10">
           <p className="text-sm font-semibold text-brand tracking-widest uppercase mb-3">Consolidação</p>
           <h2
-            className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-0.035em] text-slate-900 dark:text-white leading-[1.05]"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-0.035em] leading-[1.05]"
+            style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
           >
             Informação dispersa cria decisões cegas.{" "}
             <span
@@ -141,7 +141,7 @@ export function Origin() {
                 }}
               >
                 <img src="/logo.svg" alt="Bernays" width={36} height={36} className="rounded-[7px] mb-3" />
-                <p className="text-[15px] font-bold text-slate-900 dark:text-white mb-1">Bernays</p>
+                <p className="text-[15px] font-bold mb-1" style={{ color: "var(--page-text)" }}>Bernays</p>
                 <p className="text-[12px] text-center" style={{ color: "var(--page-text-faint)" }}>
                   1 sistema integrado
                 </p>

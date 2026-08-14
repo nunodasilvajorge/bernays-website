@@ -24,8 +24,8 @@
 :root {
   --page-bg: #fafbff;
   --page-surface: #f0f2f9;
-  --page-card: rgba(0, 0, 0, 0.035);
-  --page-border: rgba(0, 0, 0, 0.08);
+  --page-card: rgba(0, 0, 0, 0.055);
+  --page-border: rgba(0, 0, 0, 0.10);
   --page-text: oklch(0.13 0.018 271);
   --page-text-muted: oklch(0.45 0.025 264);
   --page-text-faint: oklch(0.50 0.02 264);
@@ -70,6 +70,37 @@
   --mock-url: rgba(255, 255, 255, 0.28);
 }
 
+/* Noise texture overlay — adds tactile film grain to flat backgrounds */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.dark body::after {
+  opacity: 0.055;
+}
+
+/* Global focus ring — consistent, brand-coloured, keyboard-only */
+:focus-visible {
+  outline: 2px solid oklch(0.581 0.243 263 / 0.8);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Honour reduced-motion preference — disable CSS-driven animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -90,6 +121,31 @@ body {
 ::selection {
   background: oklch(0.581 0.243 263 / 0.25);
 }
+
+/* Page transitions — View Transitions API */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-exit 0.15s ease forwards;
+  }
+  ::view-transition-new(root) {
+    animation: vt-enter 0.22s ease forwards;
+  }
+}
+
+@keyframes vt-exit {
+  from { opacity: 1; filter: blur(0px); }
+  to   { opacity: 0; filter: blur(2px); }
+}
+
+@keyframes vt-enter {
+  from { opacity: 0; transform: translateY(6px); filter: blur(2px); }
+  to   { opacity: 1; transform: translateY(0);   filter: blur(0px); }
+}
+
+
+/* Hide scrollbar while keeping scroll functionality */
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
 
 /* Pricing slider */
 .bernays-slider {
@@ -123,4 +179,15 @@ body {
   cursor: pointer;
   border: none;
   box-shadow: 0 0 0 4px oklch(0.581 0.243 263 / 0.2);
+}
+.bernays-slider-neutral::-webkit-slider-thumb {
+  background: var(--page-text-faint);
+  box-shadow: 0 0 0 4px oklch(0.5 0 0 / 0.12);
+}
+.bernays-slider-neutral::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 6px oklch(0.5 0 0 / 0.16);
+}
+.bernays-slider-neutral::-moz-range-thumb {
+  background: var(--page-text-faint);
+  box-shadow: 0 0 0 4px oklch(0.5 0 0 / 0.12);
 }

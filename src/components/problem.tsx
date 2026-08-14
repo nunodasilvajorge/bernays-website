@@ -75,12 +75,12 @@ function PainCard({ pain, delay }: { pain: typeof pains[0]; delay: number }) {
             <Icon size={18} strokeWidth={1.75} style={{ color: pain.iconColor }} />
           </div>
           <h3
-            className="text-[17px] font-bold text-slate-900 dark:text-white leading-snug mb-3"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[17px] font-bold leading-snug mb-3"
+            style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
           >
             {pain.title}
           </h3>
-          <p className="text-[14px] text-slate-500 dark:text-white/40 leading-relaxed">
+          <p className="text-[14px] leading-relaxed" style={{ color: "var(--page-text-muted)" }}>
             {pain.body}
           </p>
         </div>
@@ -100,8 +100,8 @@ export function Problem() {
             O problema
           </p>
           <h2
-            className="text-[clamp(40px,5.5vw,68px)] font-extrabold tracking-[-0.04em] text-slate-900 dark:text-white leading-[1.05] max-w-3xl"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[clamp(40px,5.5vw,68px)] font-extrabold tracking-[-0.04em] leading-[1.05] max-w-3xl"
+            style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
           >
             As agências de RP têm ferramentas para tudo.{" "}
             <span

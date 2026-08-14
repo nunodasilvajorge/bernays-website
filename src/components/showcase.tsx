@@ -7,6 +7,13 @@ import { useRef } from "react"
 
 const ease = [0.22, 1, 0.36, 1] as const
 
+type Pin = {
+  x: string
+  y: string
+  label: string
+  delay: number
+}
+
 const panels = [
   {
     id: "pipeline",
@@ -23,6 +30,11 @@ const panels = [
     dark: "/growth-dark.webp",
     alt: "Bernays CRM e pipeline de crescimento",
     reverse: false,
+    pins: [
+      { x: "16%", y: "24%", label: "Pipeline aberto", delay: 0 },
+      { x: "52%", y: "24%", label: "Forecast ponderado", delay: 0.1 },
+      { x: "62%", y: "56%", label: "Pulso de actividade", delay: 0.2 },
+    ] as Pin[],
   },
   {
     id: "finance",
@@ -39,6 +51,11 @@ const panels = [
     dark: "/invoices-dark.webp",
     alt: "Bernays módulo financeiro e faturação",
     reverse: true,
+    pins: [
+      { x: "44%", y: "32%", label: "Total faturado", delay: 0 },
+      { x: "80%", y: "22%", label: "Nova fatura", delay: 0.1 },
+      { x: "22%", y: "62%", label: "Faturas emitidas", delay: 0.2 },
+    ] as Pin[],
   },
   {
     id: "delivery",
@@ -55,8 +72,52 @@ const panels = [
     dark: "/delivery-dark.webp",
     alt: "Bernays delivery e gestão de projectos",
     reverse: false,
+    pins: [
+      { x: "74%", y: "22%", label: "63h este mês", delay: 0 },
+      { x: "38%", y: "35%", label: "Budget restante", delay: 0.1 },
+      { x: "70%", y: "58%", label: "Tarefas concluídas", delay: 0.2 },
+    ] as Pin[],
   },
 ]
+
+function PinAnnotation({
+  pin,
+  isInView,
+  color,
+}: {
+  pin: Pin
+  isInView: boolean
+  color: string
+}) {
+  return (
+    <motion.div
+      className="absolute pointer-events-none z-10"
+      style={{ left: pin.x, top: pin.y }}
+      initial={{ opacity: 0, scale: 0.75, y: 6 }}
+      animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+      transition={{ duration: 0.45, delay: 0.65 + pin.delay, ease }}
+    >
+      <div
+        className="flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold whitespace-nowrap"
+        style={{
+          background: "rgba(7,8,14,0.82)",
+          border: `1px solid ${color}50`,
+          color: "rgba(255,255,255,0.9)",
+          boxShadow: `0 2px 12px rgba(0,0,0,0.4), 0 0 0 1px ${color}18`,
+          backdropFilter: "blur(8px)",
+        }}
+      >
+        <motion.div
+          className="w-1.5 h-1.5 rounded-full shrink-0"
+          style={{ background: color }}
+          animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", delay: 1 + pin.delay }}
+        />
+        {pin.label}
+      </div>
+    </motion.div>
+  )
+}
 
 function BulletList({ bullets, color }: { bullets: string[]; color: string }) {
   const ref = useRef<HTMLUListElement>(null)
@@ -69,7 +130,8 @@ function BulletList({ bullets, color }: { bullets: string[]; color: string }) {
           initial={{ opacity: 0, x: -10 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.35, delay: i * 0.1, ease }}
-          className="flex items-start gap-2.5 text-[13px] text-slate-500 dark:text-white/50"
+          className="flex items-start gap-2.5 text-[13px]"
+          style={{ color: "var(--page-text-muted)" }}
         >
           <div className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5" style={{ background: `${color}18` }}>
             <div className="w-1.5 h-1.5 rounded-full" style={{ background: color }} />
@@ -81,7 +143,21 @@ function BulletList({ bullets, color }: { bullets: string[]; color: string }) {
   )
 }
 
-function Screenshot({ light, dark, alt, fromLeft }: { light: string; dark: string; alt: string; fromLeft?: boolean }) {
+function Screenshot({
+  light,
+  dark,
+  alt,
+  fromLeft,
+  pins,
+  color,
+}: {
+  light: string
+  dark: string
+  alt: string
+  fromLeft?: boolean
+  pins: Pin[]
+  color: string
+}) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
@@ -91,14 +167,40 @@ function Screenshot({ light, dark, alt, fromLeft }: { light: string; dark: strin
       initial={{ opacity: 0, x: fromLeft ? -48 : 48, scale: 0.97 }}
       animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
       transition={{ duration: 0.75, ease }}
-      className="rounded-2xl overflow-hidden border group"
-      style={{
-        borderColor: "rgba(0,0,0,0.1)",
-        boxShadow: "0 2px 0 rgba(0,0,0,0.06), 0 24px 64px rgba(0,0,0,0.14), 0 8px 24px rgba(0,0,0,0.08)"
-      }}
+      className="relative"
     >
-      <Image src={light} alt={alt} width={1440} height={900} loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="w-full block dark:hidden transition-transform duration-500 ease-out group-hover:scale-[1.02]" />
-      <Image src={dark} alt={alt} width={1440} height={900} loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="w-full hidden dark:block transition-transform duration-500 ease-out group-hover:scale-[1.02]" />
+      {/* Image */}
+      <div
+        className="rounded-2xl overflow-hidden border group"
+        style={{
+          borderColor: "rgba(0,0,0,0.1)",
+          boxShadow: "0 2px 0 rgba(0,0,0,0.06), 0 24px 64px rgba(0,0,0,0.14), 0 8px 24px rgba(0,0,0,0.08)",
+        }}
+      >
+        <Image
+          src={light}
+          alt={alt}
+          width={1440}
+          height={900}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, 60vw"
+          className="w-full block dark:hidden transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+        />
+        <Image
+          src={dark}
+          alt={alt}
+          width={1440}
+          height={900}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, 60vw"
+          className="w-full hidden dark:block transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+        />
+      </div>
+
+      {/* Pin annotations */}
+      {pins.map((pin) => (
+        <PinAnnotation key={pin.label} pin={pin} isInView={isInView} color={color} />
+      ))}
     </motion.div>
   )
 }
@@ -110,12 +212,12 @@ function PanelText({ panel, className }: { panel: typeof panels[0]; className?: 
         {panel.label}
       </span>
       <h3
-        className="text-[clamp(26px,3.5vw,42px)] font-extrabold tracking-[-0.035em] text-slate-900 dark:text-white leading-[1.08] mb-4"
-        style={{ fontFamily: "var(--font-display)" }}
+        className="text-[clamp(26px,3.5vw,42px)] font-extrabold tracking-[-0.035em] leading-[1.08] mb-4"
+        style={{ fontFamily: "var(--font-display)", color: "var(--page-text)" }}
       >
         {panel.title}
       </h3>
-      <p className="text-[15px] text-slate-500 dark:text-white/45 leading-relaxed mb-5">
+      <p className="text-[15px] leading-relaxed mb-5" style={{ color: "var(--page-text-muted)" }}>
         {panel.body}
       </p>
       <BulletList bullets={panel.bullets} color={panel.labelColor} />
@@ -133,13 +235,26 @@ export function Showcase() {
               <div className="grid md:grid-cols-[3fr_2fr] gap-16 items-center">
                 <PanelText panel={panel} className="md:col-start-2 md:row-start-1" />
                 <div className="md:col-start-1 md:row-start-1">
-                  <Screenshot light={panel.light} dark={panel.dark} alt={panel.alt} fromLeft />
+                  <Screenshot
+                    light={panel.light}
+                    dark={panel.dark}
+                    alt={panel.alt}
+                    fromLeft
+                    pins={panel.pins}
+                    color={panel.labelColor}
+                  />
                 </div>
               </div>
             ) : (
               <div className="grid md:grid-cols-[2fr_3fr] gap-16 items-center">
                 <PanelText panel={panel} />
-                <Screenshot light={panel.light} dark={panel.dark} alt={panel.alt} />
+                <Screenshot
+                  light={panel.light}
+                  dark={panel.dark}
+                  alt={panel.alt}
+                  pins={panel.pins}
+                  color={panel.labelColor}
+                />
               </div>
             )}
 
