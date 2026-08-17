@@ -146,6 +146,28 @@ export default function PrivacidadePage() {
             </ul>
           </section>
 
+          <section id="google">
+            <h2 className="text-[20px] font-bold mb-3" style={{ color: "var(--page-text)" }}>
+              2.1. Dados de contas Google
+            </h2>
+            <p className="text-[15px] leading-relaxed mb-4">
+              Se optares por ligar a tua conta Google ao Bernays, o acesso é feito por OAuth e limita-se ao estritamente necessário para a funcionalidade que escolheres:
+            </p>
+            <ul className="space-y-3 text-[15px] leading-relaxed mb-4">
+              <li className="flex gap-3">
+                <span className="text-brand mt-1 shrink-0">·</span>
+                <span><strong style={{ color: "var(--page-text)" }}>Envio de email (âmbito <code>gmail.send</code>):</strong> usado exclusivamente para enviar, a partir do teu próprio endereço, mensagens que compões e envias explicitamente na interface do Bernays (por exemplo, pitches a jornalistas). Este âmbito <strong style={{ color: "var(--page-text)" }}>não dá acesso de leitura</strong> à tua caixa de correio: o Bernays não lê, não armazena e não analisa o conteúdo das tuas mensagens recebidas.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-brand mt-1 shrink-0">·</span>
+                <span><strong style={{ color: "var(--page-text)" }}>Dados guardados:</strong> apenas o endereço da conta ligada e os tokens OAuth necessários para enviar em teu nome, armazenados de forma cifrada. Podes desligar a conta a qualquer momento nas definições do Bernays ou revogar o acesso diretamente na tua conta Google — em ambos os casos os tokens deixam de ser utilizáveis.</span>
+              </li>
+            </ul>
+            <p className="text-[15px] leading-relaxed">
+              A utilização de dados recebidos das APIs da Google cumpre a <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" className="text-brand hover:underline">Google API Services User Data Policy</a>, incluindo os requisitos de Utilização Limitada (Limited Use): estes dados <strong style={{ color: "var(--page-text)" }}>nunca são vendidos, nunca são usados para publicidade e nunca são usados para treinar modelos de IA/ML</strong>. Nenhum humano acede a estes dados, salvo com o teu consentimento explícito, por razões de segurança (investigação de abuso), para cumprir obrigações legais, ou de forma agregada e anonimizada para operação interna do serviço.
+            </p>
+          </section>
+
           <section id="finalidade">
             <h2 className="text-[20px] font-bold mb-3" style={{ color: "var(--page-text)" }}>
               3. Finalidade e base jurídica
