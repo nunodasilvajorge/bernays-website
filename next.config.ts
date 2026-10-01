@@ -4,7 +4,6 @@ const nextConfig: NextConfig = {
   typescript: { ignoreBuildErrors: true },
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
-    viewTransition: true,
   },
   async headers() {
     const isProd = process.env.NODE_ENV === "production"
